@@ -1,4 +1,3 @@
-
   /* Reset styles */
   /* Reset styles */
   /* Reset styles */
@@ -433,5 +432,9 @@ border-radius: 20px;
   }
 
  
+  #s2 img{
+
+    width: 60%;
+  }
 
   /* Slider  */
