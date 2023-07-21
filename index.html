@@ -1,65 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Responsive Online Store</title>
-  <link rel="stylesheet" href="index.css">
-  <script src="index.js"></script>
-  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="index.css">
+  <title>Document</title>
 </head>
-
-
-
-
-
 <body>
-  <!-- Header -->
-  <header>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-      <h1>Max Store</h1>
-      <nav>
-        <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="#smartphone">Smartphones</a></li>
-          <li><a href="#Laptop-1">Laptop</a></li>
-          <li><a href="#">Tablet</a></li>
-          <li><a href="https://g.navi.com/qzIID">Navi</a></li>
+      <a class="navbar-brand" href="#">Maxstore</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
           
-          
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Mobile
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">Realme</a></li>
+              <li><a class="dropdown-item" href="#">Xiaomi</a></li>
+              <li><a class="dropdown-item" href="#">POCO</a></li>
+              <li><a class="dropdown-item" href="#">Vivo</a></li>
+              <li><a class="dropdown-item" href="#">iQOO</a></li>
+              <li><a class="dropdown-item" href="#">Samsung</a></li>
+              <li><a class="dropdown-item" href="#">Redmi</a></li>
+              <li><a class="dropdown-item" href="#">Google</a></li>
+              <li><a class="dropdown-item" href="#">Motorola</a></li>
+              <li><a class="dropdown-item" href="#">Apple</a></li>
+              <li><a class="dropdown-item" href="#">Infinix</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">More</a></li>
+            </ul>
+          </li>
+
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Laptop
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Tab
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Airbuds
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link disabled">Disabled</a>
+          </li> -->
         </ul>
-      </nav>
+
+        
+
+        
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
     </div>
-  </header>
+  </nav>
 
+ 
+  </div>
 
-  <!-- Slider -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+  <script src="main.js"></script>
+
 
   <div class="container">
     <div class="slider">
 
 
-      <div class="slide">
-        <a href="https://g.navi.com/qzIID"><img
-            src="https://images-eu.ssl-images-amazon.com/images/G/31/img22/Electronics/BAU/Page/Revamp/Creatives/Header/Electronics_PC.gif"
+      <div class="slide" >
+        <a href="https://amzn.to/3Oq5Mur"><img
+            src="https://images-eu.ssl-images-amazon.com/images/G/31/img21/Wireless/vinambia/ILMupgrade1/D89785983_Hero_1242x450_1.jpg"
             alt=""></a>
 
       </div>
 
-<!-- 
-      <div class="slide">
-        <a href="https://amzn.to/3IJGvYS"><img src="https://images-eu.ssl-images-amazon.com/images/G/31/img22/wearables/Noise-quad-call/avail-1500x300.jpg" height="200px" alt=""></a>
+ 
+      <div class="slide" id="s2">
+        <a href="https://amzn.to/3O4cFzT"><img src="https://m.media-amazon.com/images/G/31/tiyesum/iQOONeo7Pro/19July/D84645784_1400x800_6._CB600318082_.jpg"  alt=""></a>
           
           
           
-        </div> -->
+        </div> 
 
 
-      <div class="slide">
+      <div class="slide" id="s2">
 
-        <a href="https://amzn.to/45xLkOr"><img src="https://images-eu.ssl-images-amazon.com/images/G/31/img22/wearables/Save_Extra_smartwatch_1500x300_.gif" alt=""></a>
+        <a href="https://amzn.to/3QcBYml"><img src="https://m.media-amazon.com/images/G/31/img23/Wireless/ssserene/BAU/July23/Nord3/D86416071_WLD_OnePlus_Vitamin_NewLaunch_catpage_1400x800._CB599897773_.jpg" alt=""></a>
       </div>
 <!-- 
       <div class="slide">4</div>
@@ -251,7 +318,6 @@
       <p>&copy; 2023 <a href="Maxsami.tech">Maxsami.tech</a>. All rights reserved.</p>
     </div>
   </footer>
-
+  
 </body>
-
 </html>
