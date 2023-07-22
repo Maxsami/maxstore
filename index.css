@@ -22,6 +22,7 @@
   .container-p {
     max-width: 1200px;
     margin: auto auto;
+  
     padding: 20px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr  ;
@@ -431,10 +432,21 @@ border-radius: 20px;
     margin-bottom: 10px;
   }
 
- 
+
+  #ls{
+    background-color: red;
+    width: fit-content;
+    padding: 10px 10px;
+    border-radius: 10px;
+    color: white;
+    margin-left: 15px;
+    margin-bottom: 0PX;
+    margin: auto;
+  }
+/*  
   #s2 img{
 
     width: 60%;
-  }
+  } */
 
   /* Slider  */
