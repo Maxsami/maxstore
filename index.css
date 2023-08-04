@@ -442,6 +442,7 @@ border-radius: 20px;
     margin-left: 15px;
     margin-bottom: 0PX;
     margin: auto;
+    margin-top: 40px;
   }
 /*  
   #s2 img{
@@ -450,3 +451,50 @@ border-radius: 20px;
   } */
 
   /* Slider  */
+
+  .offer-c-box img{
+    width: 100px;
+
+  }
+
+  .offer-c{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    flex-wrap: wrap;
+   
+  }
+
+  .offer-c-box{
+    margin: 10px 20px;
+   
+    
+  }
+
+
+  .s-ads img{
+    width: 500px;
+    border-radius: 20px;
+    
+
+  }
+
+  .s-ads{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    margin: 10px 47px;
+   
+  }
+
+  .s-ads-b{
+
+    margin: 0px 20px;
+ 
+   
+  }
+
