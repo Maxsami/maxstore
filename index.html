@@ -34,6 +34,7 @@
         img {
             max-width: 100%;
             height: auto;
+            display: block; /* Fixes potential bottom space under image */
         }
 
         /* --- Header & Navigation --- */
@@ -165,7 +166,7 @@
         .cta-button { background-color: var(--primary-color); color: #ffffff; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; transition: background-color 0.3s ease; }
         .cta-button:hover { background-color: #2980b9; }
 
-        /* --- NEW: Promotional Banner Section --- */
+        /* --- Promotional Banner Section --- */
         .promo-banner-section {
             padding: 40px 0;
         }
@@ -195,102 +196,4 @@
 </head>
 <body>
 
-    <header class="main-header">
-        <nav class="main-nav">
-            <a href="#" class="logo">GeminiStore</a>
-            <ul class="nav-links">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Shop</a></li>
-                <li><a href="#">New Arrivals</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-            <div class="nav-icons">
-                <a href="#" aria-label="Search">🔍</a>
-                <a href="#" aria-label="My Account">👤</a>
-                <a href="#" aria-label="Shopping Cart">🛒</a>
-            </div>
-            <div class="hamburger">
-                <div class="line line1"></div>
-                <div class="line line2"></div>
-                <div class="line line3"></div>
-            </div>
-        </nav>
-    </header>
-
-    <main>
-        <section class="hero">
-            <h1>Autumn Collection is Here</h1>
-            <p>Discover the latest trends and styles for this season.</p>
-            <a href="#" class="cta-button">Shop Now</a>
-        </section>
-
-        <section class="promo-banner-section container">
-            <a href="#">
-                <img src="https://source.unsplash.com/1200x400/?sale,offer" alt="Great Indian Festival Sale Banner">
-            </a>
-        </section>
-
-        <section class="product-section container">
-            <h2>Featured Products</h2>
-            <div class="product-grid">
-                <div class="product-card"><img src="https://source.unsplash.com/400x300/?tshirt" alt="Stylish T-Shirt" class="product-image"><div class="product-info"><h3 class="product-title">Classic Cotton T-Shirt</h3><p class="product-price">$29.99</p><button class="add-to-cart-btn">Add to Cart</button></div></div>
-                <div class="product-card"><img src="https://source.unsplash.com/400x300/?jeans" alt="Denim Jeans" class="product-image"><div class="product-info"><h3 class="product-title">Slim Fit Denim Jeans</h3><p class="product-price">$89.50</p><button class="add-to-cart-btn">Add to Cart</button></div></div>
-                <div class="product-card"><img src="https://source.unsplash.com/400x300/?sneakers" alt="Running Shoes" class="product-image"><div class="product-info"><h3 class="product-title">Urban Runner Sneakers</h3><p class="product-price">$120.00</p><button class="add-to-cart-btn">Add to Cart</button></div></div>
-                <div class="product-card"><img src="https://source.unsplash.com/400x300/?watch" alt="Luxury Watch" class="product-image"><div class="product-info"><h3 class="product-title">Elegant Wrist Watch</h3><p class="product-price">$250.00</p><button class="add-to-cart-btn">Add to Cart</button></div></div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="main-footer">
-        <div class="container footer-content">
-            <p>&copy; 2025 GeminiStore. All Rights Reserved.</p>
-        </div>
-    </footer>
-
-    <script>
-        // --- Mobile Navigation Toggle ---
-        const navSlide = () => {
-            const hamburger = document.querySelector('.hamburger');
-            const nav = document.querySelector('.nav-links');
-            const navLinks = document.querySelectorAll('.nav-links li');
-            
-            const toggleMenu = () => {
-                nav.classList.toggle('nav-active');
-                navLinks.forEach((link, index) => {
-                    if (link.style.animation) {
-                        link.style.animation = '';
-                    } else {
-                        link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
-                    }
-                });
-                hamburger.classList.toggle('toggle');
-            };
-            
-            hamburger.addEventListener('click', toggleMenu);
-            
-            navLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    if (nav.classList.contains('nav-active')) {
-                        toggleMenu();
-                    }
-                });
-            });
-        }
-        navSlide();
-
-        // --- "Add to Cart" functionality ---
-        document.querySelectorAll('.add-to-cart-btn').forEach(button => {
-            button.addEventListener('click', () => {
-                button.textContent = 'Added! 🎉';
-                button.style.backgroundColor = '#27ae60';
-                setTimeout(() => {
-                    button.textContent = 'Add to Cart';
-                    button.style.backgroundColor = 'var(--secondary-color)';
-                }, 2000);
-            });
-        });
-    </script>
-
-</body>
-</html>
+    
