@@ -60,7 +60,7 @@
             font-weight: bold;
             color: var(--primary-color);
             text-decoration: none;
-            z-index: 10; /* Keep logo on top */
+            z-index: 10;
         }
 
         .nav-links {
@@ -68,7 +68,7 @@
             display: flex;
             margin: 0;
             padding: 0;
-            transition: transform 0.5s ease-in-out; /* For slide animation */
+            transition: transform 0.5s ease-in-out;
         }
 
         .nav-links li {
@@ -94,7 +94,7 @@
 
         /* --- Hamburger Menu Icon --- */
         .hamburger {
-            display: none; /* Hidden by default on desktop */
+            display: none;
             cursor: pointer;
             z-index: 10;
         }
@@ -114,18 +114,20 @@
                 right: 0px;
                 top: 0px;
                 height: 100vh;
-                width: 45%; /* <<< CHANGED FROM 60% TO 45% */
+                width: 45%;
                 background-color: var(--secondary-color);
                 flex-direction: column;
                 align-items: center;
-                justify-content: space-around;
-                transform: translateX(100%); /* Hides the menu off-screen */
+                /* CHANGED: Replaced space-around with flex-start for closer items */
+                justify-content: flex-start;
+                padding-top: 5rem; /* CHANGED: Added padding to push items down from the top */
+                transform: translateX(100%);
                 box-shadow: -5px 0 15px rgba(0,0,0,0.2);
             }
 
             .nav-links li {
-                margin-left: 0;
-                opacity: 0; /* For fade-in animation */
+                margin: 1.5rem 0; /* CHANGED: Replaced margin-left with vertical margin */
+                opacity: 0;
             }
             
             .nav-links a {
@@ -134,15 +136,13 @@
             }
 
             .hamburger {
-                display: block; /* Show hamburger on mobile */
+                display: block;
             }
 
-            /* Class added by JavaScript when menu is open */
             .nav-active {
                 transform: translateX(0%);
             }
             
-            /* Class for animating hamburger to an 'X' */
             .toggle .line1 {
                 transform: rotate(-45deg) translate(-5px, 6px);
             }
@@ -154,7 +154,6 @@
             }
         }
         
-        /* Animation for links fading in */
         @keyframes navLinkFade {
             from {
                 opacity: 0;
@@ -166,20 +165,9 @@
             }
         }
 
-        /* --- Hero Section --- */
-        .hero {
-            background: linear-gradient(rgba(44, 62, 80, 0.7), rgba(44, 62, 80, 0.7)), url('https://source.unsplash.com/1600x600/?shopping,fashion') no-repeat center center/cover;
-            color: #ffffff;
-            text-align: center;
-            padding: 100px 20px;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
-        }
-
-        /* [Rest of your CSS for hero, products, footer remains the same...] */
+        /* --- Hero Section & Rest of CSS --- */
+        .hero { background: linear-gradient(rgba(44, 62, 80, 0.7), rgba(44, 62, 80, 0.7)), url('https://source.unsplash.com/1600x600/?shopping,fashion') no-repeat center center/cover; color: #ffffff; text-align: center; padding: 100px 20px; }
+        .hero h1 { font-size: 3rem; margin-bottom: 10px; }
         .hero p { font-size: 1.2rem; margin-bottom: 30px; }
         .cta-button { background-color: var(--primary-color); color: #ffffff; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; transition: background-color 0.3s ease; }
         .cta-button:hover { background-color: #2980b9; }
@@ -233,13 +221,14 @@
     </footer>
 
     <script>
-        // --- NEW: Mobile Navigation Toggle ---
+        // --- Mobile Navigation Toggle ---
         const navSlide = () => {
             const hamburger = document.querySelector('.hamburger');
             const nav = document.querySelector('.nav-links');
             const navLinks = document.querySelectorAll('.nav-links li');
 
-            hamburger.addEventListener('click', () => {
+            // Function to open/close menu
+            const toggleMenu = () => {
                 // Toggle Nav
                 nav.classList.toggle('nav-active');
 
@@ -254,19 +243,29 @@
                 
                 // Hamburger Animation
                 hamburger.classList.toggle('toggle');
+            };
+
+            // Listen for click on hamburger
+            hamburger.addEventListener('click', toggleMenu);
+
+            // NEW: Close menu when a link is clicked
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (nav.classList.contains('nav-active')) {
+                        toggleMenu();
+                    }
+                });
             });
         }
 
         // Call the function to activate it
         navSlide();
 
-
-        // --- Original "Add to Cart" functionality ---
+        // --- "Add to Cart" functionality ---
         document.querySelectorAll('.add-to-cart-btn').forEach(button => {
             button.addEventListener('click', () => {
                 button.textContent = 'Added! 🎉';
                 button.style.backgroundColor = '#27ae60';
-
                 setTimeout(() => {
                     button.textContent = 'Add to Cart';
                     button.style.backgroundColor = 'var(--secondary-color)';
