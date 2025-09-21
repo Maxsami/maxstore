@@ -107,7 +107,7 @@
             transition: all 0.3s ease-in-out;
         }
 
-        /* --- MOBILE STYLES (The Fix) --- */
+        /* --- MOBILE STYLES --- */
         @media screen and (max-width: 768px) {
             .nav-links {
                 position: fixed;
@@ -118,15 +118,14 @@
                 background-color: var(--secondary-color);
                 flex-direction: column;
                 align-items: center;
-                /* CHANGED: Replaced space-around with flex-start for closer items */
                 justify-content: flex-start;
-                padding-top: 5rem; /* CHANGED: Added padding to push items down from the top */
+                padding-top: 5rem;
                 transform: translateX(100%);
                 box-shadow: -5px 0 15px rgba(0,0,0,0.2);
             }
 
             .nav-links li {
-                margin: 1.5rem 0; /* CHANGED: Replaced margin-left with vertical margin */
+                margin: 1.5rem 0;
                 opacity: 0;
             }
             
@@ -155,22 +154,29 @@
         }
         
         @keyframes navLinkFade {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0px);
-            }
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0px); }
         }
 
-        /* --- Hero Section & Rest of CSS --- */
+        /* --- Hero Section --- */
         .hero { background: linear-gradient(rgba(44, 62, 80, 0.7), rgba(44, 62, 80, 0.7)), url('https://source.unsplash.com/1600x600/?shopping,fashion') no-repeat center center/cover; color: #ffffff; text-align: center; padding: 100px 20px; }
         .hero h1 { font-size: 3rem; margin-bottom: 10px; }
         .hero p { font-size: 1.2rem; margin-bottom: 30px; }
         .cta-button { background-color: var(--primary-color); color: #ffffff; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; transition: background-color 0.3s ease; }
         .cta-button:hover { background-color: #2980b9; }
+
+        /* --- NEW: Promotional Banner Section --- */
+        .promo-banner-section {
+            padding: 40px 0;
+        }
+
+        .promo-banner-section img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* --- Product Grid Section --- */
         .product-section h2 { text-align: center; font-size: 2.5rem; margin-bottom: 40px; color: var(--dark-gray); }
         .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 30px; }
         .product-card { background-color: #ffffff; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden; text-align: center; transition: transform 0.3s ease, box-shadow 0.3s ease; }
@@ -181,6 +187,8 @@
         .product-price { font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 15px; }
         .add-to-cart-btn { background-color: var(--secondary-color); color: #ffffff; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; width: 100%; font-size: 1rem; transition: background-color 0.3s ease; }
         .add-to-cart-btn:hover { background-color: var(--dark-gray); }
+
+        /* --- Footer --- */
         .main-footer { background-color: var(--secondary-color); color: var(--light-gray); padding: 40px 0; text-align: center; margin-top: 50px; }
         .footer-content p { margin: 0; }
     </style>
@@ -189,7 +197,7 @@
 
     <header class="main-header">
         <nav class="main-nav">
-            <a href="#" class="logo">MAX STORE</a>
+            <a href="#" class="logo">GeminiStore</a>
             <ul class="nav-links">
                 <li><a href="#">Home</a></li>
                 <li><a href="#">Shop</a></li>
@@ -211,7 +219,27 @@
     </header>
 
     <main>
-        <section class="hero"><h1>Autumn Collection is Here</h1><p>Discover the latest trends and styles for this season.</p><a href="#" class="cta-button">Shop Now</a></section><section class="product-section container"><h2>Featured Products</h2><div class="product-grid"><div class="product-card"><img src="https://source.unsplash.com/400x300/?tshirt" alt="Stylish T-Shirt" class="product-image"><div class="product-info"><h3 class="product-title">Classic Cotton T-Shirt</h3><p class="product-price">$29.99</p><button class="add-to-cart-btn">Add to Cart</button></div></div><div class="product-card"><img src="https://source.unsplash.com/400x300/?jeans" alt="Denim Jeans" class="product-image"><div class="product-info"><h3 class="product-title">Slim Fit Denim Jeans</h3><p class="product-price">$89.50</p><button class="add-to-cart-btn">Add to Cart</button></div></div><div class="product-card"><img src="https://source.unsplash.com/400x300/?sneakers" alt="Running Shoes" class="product-image"><div class="product-info"><h3 class="product-title">Urban Runner Sneakers</h3><p class="product-price">$120.00</p><button class="add-to-cart-btn">Add to Cart</button></div></div><div class="product-card"><img src="https://source.unsplash.com/400x300/?watch" alt="Luxury Watch" class="product-image"><div class="product-info"><h3 class="product-title">Elegant Wrist Watch</h3><p class="product-price">$250.00</p><button class="add-to-cart-btn">Add to Cart</button></div></div></div></section>
+        <section class="hero">
+            <h1>Autumn Collection is Here</h1>
+            <p>Discover the latest trends and styles for this season.</p>
+            <a href="#" class="cta-button">Shop Now</a>
+        </section>
+
+        <section class="promo-banner-section container">
+            <a href="#">
+                <img src="https://source.unsplash.com/1200x400/?sale,offer" alt="Great Indian Festival Sale Banner">
+            </a>
+        </section>
+
+        <section class="product-section container">
+            <h2>Featured Products</h2>
+            <div class="product-grid">
+                <div class="product-card"><img src="https://source.unsplash.com/400x300/?tshirt" alt="Stylish T-Shirt" class="product-image"><div class="product-info"><h3 class="product-title">Classic Cotton T-Shirt</h3><p class="product-price">$29.99</p><button class="add-to-cart-btn">Add to Cart</button></div></div>
+                <div class="product-card"><img src="https://source.unsplash.com/400x300/?jeans" alt="Denim Jeans" class="product-image"><div class="product-info"><h3 class="product-title">Slim Fit Denim Jeans</h3><p class="product-price">$89.50</p><button class="add-to-cart-btn">Add to Cart</button></div></div>
+                <div class="product-card"><img src="https://source.unsplash.com/400x300/?sneakers" alt="Running Shoes" class="product-image"><div class="product-info"><h3 class="product-title">Urban Runner Sneakers</h3><p class="product-price">$120.00</p><button class="add-to-cart-btn">Add to Cart</button></div></div>
+                <div class="product-card"><img src="https://source.unsplash.com/400x300/?watch" alt="Luxury Watch" class="product-image"><div class="product-info"><h3 class="product-title">Elegant Wrist Watch</h3><p class="product-price">$250.00</p><button class="add-to-cart-btn">Add to Cart</button></div></div>
+            </div>
+        </section>
     </main>
 
     <footer class="main-footer">
@@ -226,13 +254,9 @@
             const hamburger = document.querySelector('.hamburger');
             const nav = document.querySelector('.nav-links');
             const navLinks = document.querySelectorAll('.nav-links li');
-
-            // Function to open/close menu
+            
             const toggleMenu = () => {
-                // Toggle Nav
                 nav.classList.toggle('nav-active');
-
-                // Animate Links
                 navLinks.forEach((link, index) => {
                     if (link.style.animation) {
                         link.style.animation = '';
@@ -240,15 +264,11 @@
                         link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
                     }
                 });
-                
-                // Hamburger Animation
                 hamburger.classList.toggle('toggle');
             };
-
-            // Listen for click on hamburger
+            
             hamburger.addEventListener('click', toggleMenu);
-
-            // NEW: Close menu when a link is clicked
+            
             navLinks.forEach(link => {
                 link.addEventListener('click', () => {
                     if (nav.classList.contains('nav-active')) {
@@ -257,8 +277,6 @@
                 });
             });
         }
-
-        // Call the function to activate it
         navSlide();
 
         // --- "Add to Cart" functionality ---
