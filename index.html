@@ -3,197 +3,386 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gemini Store - Your One-Stop Shop</title>
+    <title>Flipkart Clone - Fully Functional E-commerce</title>
+    <link rel="shortcut icon" href="https://static-assets-web.flixcart.com/www/promos/new/20150528-140547-favicon-retina.ico" type="image/x-icon">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Material Icons CDN -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Font Awesome (for the cart icon fallback) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+    
+    <!-- Custom CSS for the Flipkart look and feel -->
     <style>
-        /* --- Global Styles & Variables --- */
+        /* Define custom colors */
         :root {
-            --primary-color: #3498db;
-            --secondary-color: #2c3e50;
-            --accent-color: #e74c3c;
-            --light-gray: #ecf0f1;
-            --dark-gray: #34495e;
-            --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --primary-blue: #2874f0;
+            --primary-orange: #ff9f00;
+            --primary-green: #388e3c;
+            --primary-darkBlue: #172337;
+            --primary-grey: #878787;
         }
 
+        .bg-primary-blue { background-color: var(--primary-blue); }
+        .text-primary-blue { color: var(--primary-blue); }
+        .bg-primary-orange { background-color: var(--primary-orange); }
+        .bg-primary-green { background-color: var(--primary-green); }
+        .bg-primary-darkBlue { background-color: var(--primary-darkBlue); }
+        .text-primary-grey { color: var(--primary-grey); }
+        .border-primary-blue { border-color: var(--primary-blue); }
+
+        /* General styling from the original style.css, simplified for single file */
         body {
-            font-family: var(--font-family);
-            margin: 0;
-            padding: 0;
-            background-color: #f9f9f9;
-            color: var(--secondary-color);
-            line-height: 1.6;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f1f3f6; /* Flipkart background color */
+        }
+        
+        .arrow_down {
+            border-left: 11px solid transparent;
+            border-right: 11px solid transparent;
+            border-bottom: 11px solid #fff;
+        }
+        
+        /* Dropdown menus (using opacity/visibility for smoothness) */
+        .userDropDownMenu, .moreDropDownMenu {
+            transition: opacity 0.1s ease-out, visibility 0.1s ease-out;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 50;
+        }
+        
+        .userDropDown:hover .userDropDownMenu,
+        .moreDropDown:hover .moreDropDownMenu {
+            opacity: 1;
+            visibility: visible;
         }
 
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block; /* Fixes potential bottom space under image */
-        }
-
-        /* --- Header & Navigation --- */
-        .main-header {
-            background-color: #ffffff;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            padding: 1rem 0;
+        /* Material Icons sizing */
+        .md-12 { font-size: 12px; }
+        .md-16 { font-size: 16px; }
+        .md-18 { font-size: 18px; }
+        .md-20 { font-size: 20px; }
+        .md-22 { font-size: 22px; }
+        
+        /* Sticky sidebar for price details in cart/checkout */
+        .sticky-top {
             position: sticky;
-            top: 0;
-            z-index: 1000;
+            top: 60px; /* Adjusted for the fixed header height */
+            height: fit-content;
         }
-
-        .main-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: var(--primary-color);
-            text-decoration: none;
-            z-index: 10;
-        }
-
-        .nav-links {
-            list-style: none;
-            display: flex;
-            margin: 0;
-            padding: 0;
-            transition: transform 0.5s ease-in-out;
-        }
-
-        .nav-links li {
-            margin-left: 25px;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--secondary-color);
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .nav-links a:hover, .nav-icons a:hover {
-            color: var(--primary-color);
-        }
-        
-        .nav-icons a {
-            margin-left: 20px;
-            font-size: 1.2rem;
-            color: var(--secondary-color);
-        }
-
-        /* --- Hamburger Menu Icon --- */
-        .hamburger {
-            display: none;
-            cursor: pointer;
-            z-index: 10;
-        }
-
-        .hamburger .line {
-            width: 25px;
-            height: 3px;
-            background-color: var(--secondary-color);
-            margin: 5px;
-            transition: all 0.3s ease-in-out;
-        }
-
-        /* --- MOBILE STYLES --- */
-        @media screen and (max-width: 768px) {
-            .nav-links {
-                position: fixed;
-                right: 0px;
-                top: 0px;
-                height: 100vh;
-                width: 45%;
-                background-color: var(--secondary-color);
-                flex-direction: column;
-                align-items: center;
-                justify-content: flex-start;
-                padding-top: 5rem;
-                transform: translateX(100%);
-                box-shadow: -5px 0 15px rgba(0,0,0,0.2);
-            }
-
-            .nav-links li {
-                margin: 1.5rem 0;
-                opacity: 0;
-            }
-            
-            .nav-links a {
-                color: white;
-                font-size: 1.2rem;
-            }
-
-            .hamburger {
-                display: block;
-            }
-
-            .nav-active {
-                transform: translateX(0%);
-            }
-            
-            .toggle .line1 {
-                transform: rotate(-45deg) translate(-5px, 6px);
-            }
-            .toggle .line2 {
-                opacity: 0;
-            }
-            .toggle .line3 {
-                transform: rotate(45deg) translate(-5px, -6px);
-            }
-        }
-        
-        @keyframes navLinkFade {
-            from { opacity: 0; transform: translateX(50px); }
-            to { opacity: 1; transform: translateX(0px); }
-        }
-
-        /* --- Hero Section --- */
-        .hero { background: linear-gradient(rgba(44, 62, 80, 0.7), rgba(44, 62, 80, 0.7)), url('https://source.unsplash.com/1600x600/?shopping,fashion') no-repeat center center/cover; color: #ffffff; text-align: center; padding: 100px 20px; }
-        .hero h1 { font-size: 3rem; margin-bottom: 10px; }
-        .hero p { font-size: 1.2rem; margin-bottom: 30px; }
-        .cta-button { background-color: var(--primary-color); color: #ffffff; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; transition: background-color 0.3s ease; }
-        .cta-button:hover { background-color: #2980b9; }
-
-        /* --- Promotional Banner Section --- */
-        .promo-banner-section {
-            padding: 40px 0;
-        }
-
-        .promo-banner-section img {
-            width: 100%;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        /* --- Product Grid Section --- */
-        .product-section h2 { text-align: center; font-size: 2.5rem; margin-bottom: 40px; color: var(--dark-gray); }
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 30px; }
-        .product-card { background-color: #ffffff; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden; text-align: center; transition: transform 0.3s ease, box-shadow 0.3s ease; }
-        .product-card:hover { transform: translateY(-5px); box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); }
-        .product-image { width: 100%; height: 200px; object-fit: cover; }
-        .product-info { padding: 20px; }
-        .product-title { font-size: 1.2rem; margin: 10px 0; color: var(--secondary-color); }
-        .product-price { font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 15px; }
-        .add-to-cart-btn { background-color: var(--secondary-color); color: #ffffff; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; width: 100%; font-size: 1rem; transition: background-color 0.3s ease; }
-        .add-to-cart-btn:hover { background-color: var(--dark-gray); }
-
-        /* --- Footer --- */
-        .main-footer { background-color: var(--secondary-color); color: var(--light-gray); padding: 40px 0; text-align: center; margin-top: 50px; }
-        .footer-content p { margin: 0; }
     </style>
 </head>
-<body>
+<body class="bg-gray-100 min-h-screen">
 
-    
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex justify-center items-center z-[100] hidden">
+        <div class="flex flex-col items-center p-8 bg-white rounded-lg shadow-2xl">
+            <svg class="animate-spin -ml-1 mr-3 h-8 w-8 text-primary-blue" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            <p class="mt-3 text-sm font-medium text-gray-700">Connecting...</p>
+        </div>
+    </div>
+
+
+    <!-- Status Modal (Replaces alert/confirm) -->
+    <div id="status-modal" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex justify-center items-center z-[100] hidden">
+        <div class="bg-white p-6 rounded-lg shadow-2xl max-w-sm mx-4 transform transition-all">
+            <h3 id="modal-title" class="text-xl font-bold mb-3 text-gray-800"></h3>
+            <p id="modal-message" class="text-sm text-gray-600 mb-6"></p>
+            <div class="flex justify-end space-x-3">
+                <button id="modal-confirm" class="hidden px-4 py-2 bg-primary-orange text-white font-semibold rounded hover:bg-orange-600 transition duration-150 text-sm">Yes, Proceed</button>
+                <button id="modal-close" class="px-4 py-2 bg-primary-blue text-white font-semibold rounded hover:bg-blue-600 transition duration-150 text-sm">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- header starts -->
+    <header class="bg-primary-blue fixed top-0 py-2.5 w-full z-40 shadow-md">
+        <!-- navbar container -->
+        <div class="w-full sm:w-11/12 xl:w-9/12 px-4 mx-auto flex justify-between items-center relative">
+            <!-- logo & search container -->
+            <div class="flex items-center flex-1">
+                <a class="h-7 mr-4" href="javascript:void(0)" onclick="navigateTo('home')">
+                    <img class="h-full w-full object-contain" src="https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/fk-plus_3b0baa.png" alt="Flipkart Logo">
+                </a>
+                <!-- search container -->
+                <div class="w-9/12 px-4 py-1.5 hidden sm:flex justify-between items-center shadow-md bg-white rounded-sm">
+                    <input class="text-sm flex-1 outline-none border-none placeholder-gray-500" type="text" placeholder="Search for products, brands and more">
+                    <span class="material-icons text-primary-blue">search</span>
+                </div>
+            </div>
+            <!-- right navs -->
+            <div class="flex items-center justify-between gap-5 sm:gap-7 relative text-sm">
+                <span class="userDropDown flex items-center text-white font-medium gap-1 cursor-pointer">
+                    <span id="user-display-name">Guest</span>
+                    <span class="material-icons text-sm transition-transform duration-100">expand_more</span>
+                </span>
+                
+                <a href="javascript:void(0)" onclick="navigateTo('cart')" class="flex items-center text-white font-medium gap-2 relative">
+                    <span class="material-icons">shopping_cart</span>
+                    <!-- badge count -->
+                    <div id="cart-count-badge" class="w-5 h-5 p-2 bg-red-500 text-xs rounded-full absolute -top-2 left-3 flex justify-center items-center border border-white text-white">
+                        0
+                    </div>
+                    Cart
+                </a>
+                
+                <a href="javascript:void(0)" onclick="navigateTo('orders')" class="hidden sm:flex items-center text-white font-medium gap-2 relative">
+                    <span class="material-icons">shopping_bag</span>
+                    Orders
+                </a>
+            </div>
+        </div>
+    </header>
+    <!-- header ends -->
+
+    <!-- main content container -->
+    <div id="app-container" class="pt-16 min-h-[calc(100vh-60px)]">
+        <!-- Application views render here -->
+    </div>
+    <!-- main content container -->
+
+    <!-- footer starts -->
+    <footer class="w-full py-4 px-4 sm:px-12 bg-primary-darkBlue text-white text-xs border-t border-gray-600">
+        <div class="w-full sm:w-11/12 xl:w-9/12 mx-auto flex flex-col sm:flex-row gap-5">
+            <div class="w-full sm:w-1/2 grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <div class="flex flex-col gap-2"><h2 class="text-primary-grey mb-2">ABOUT</h2><a href="#" class="hover:underline">Contact Us</a></div>
+                <div class="flex flex-col gap-2"><h2 class="text-primary-grey mb-2">HELP</h2><a href="#" class="hover:underline">Payments</a></div>
+                <div class="flex flex-col gap-2"><h2 class="text-primary-grey mb-2">POLICY</h2><a href="#" class="hover:underline">Return Policy</a></div>
+                <div class="flex flex-col gap-2"><h2 class="text-primary-grey mb-2">SOCIAL</h2><a href="#" class="hover:underline">Facebook</a></div>
+            </div>
+            <div class="border-gray-600 h-full w-px border-l mx-6 hidden sm:block"></div>
+            <div class="w-full sm:w-1/2 flex flex-col sm:flex-row gap-4 justify-between">
+                <div class="w-full sm:w-1/2"><h2 class="text-primary-grey">Mail Us:</h2><p class="mt-2 leading-5 text-gray-300">Flipkart Internet Private Limited, ...</p></div>
+                <div class="w-full sm:w-1/2"><h2 class="text-primary-grey">Registered Office Address:</h2><p class="mt-2 leading-5 text-gray-300">Flipkart Internet Private Limited, ...</p></div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- copyright cards footer -->
+    <div class="px-4 sm:px-12 py-3 w-full bg-primary-darkBlue flex justify-between items-center text-xs text-white border-t border-gray-600">
+        <div class="flex gap-4">
+            <a href="#" class="flex items-center gap-2"><span class="material-icons text-yellow-400 md-20">work</span> Sell On Flipkart</a>
+            <a href="#" class="flex items-center gap-2"><span class="material-icons text-yellow-400 md-20">help</span> Help Center</a>
+        </div>
+        <div>&copy; 2024 Flipkart Clone</div>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc, setDoc, runTransaction, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        
+        setLogLevel('debug');
+        
+        // --- Global Variables and Firebase Initialization ---
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        let app;
+        let db;
+        let auth;
+        let userId = null;
+        let isAuthReady = false;
+        let cartData = { items: [], total: 0, count: 0 };
+        let userData = {
+            address: {
+                name: 'Jane Doe',
+                phone: '9876543210',
+                pincode: '110001',
+                locality: 'Example Locality',
+                fullAddress: 'H.No 123, Block A, City Center',
+                city: 'New Delhi',
+                state: 'Delhi'
+            }
+        };
+        let unsubscribeCart = null;
+        
+        const CART_COLLECTION_PATH = `/artifacts/${appId}/users/`;
+
+        // Mock product data (repeated and expanded for demonstration sections)
+        const MOCK_PRODUCTS = [
+            { id: 'P001', name: 'SAMSUNG 230 L Direct Cool Single Door 3 Star Refrigerator', image: 'https://rukminim1.flixcart.com/image/312/312/kk1h5e80/refrigerator-new/g/y/y/rt28a3021s8-hl-1-2021-samsung-original-imafzhedkazavggn.jpeg', price: 16790, mrp: 18890, discount: '15% off', rating: 4.3, reviews: 7345 },
+            { id: 'P002', name: 'Eureka Forbes Aquasure Desire Water Purifier Aquaguard', image: 'https://rukminim1.flixcart.com/image/312/312/jxp08sw0/water-purifier/r/z/s/eureka-forbes-aquasure-from-aquaguard-desire-ro-mc-original-imafg3hwgn8p7brg.jpeg', price: 9999, mrp: 12000, discount: '17% off', rating: 4.0, reviews: 4500 },
+            { id: 'P003', name: 'boAt Airdopes 131 / 138 Wireless Earbuds', image: 'https://rukminim1.flixcart.com/image/150/150/ksdjma80/headphone/a/u/p/airdopes-131-airdopes-138-boat-original-imag5yz9sfz9bzq8.jpeg', price: 1299, mrp: 2990, discount: '56% off', rating: 4.4, reviews: 120000 },
+            { id: 'P004', name: 'Casual Backpack with Rain Cover - Spacy Unisex', image: 'https://rukminim1.flixcart.com/image/150/150/ki3gknk0-0/backpack/t/n/i/spacy-unisex-backpack-with-rain-cover-and-reflective-strip-p-041-original-imafxyypsycttkeb.jpeg', price: 899, mrp: 1800, discount: '50% off', rating: 4.2, reviews: 8000 },
+            { id: 'P005', name: 'Apple MacBook Air M1', image: 'https://rukminim1.flixcart.com/image/312/312/kfrjkp-laptop/k/m/t/apple-macbook-air-original-imafwgftrkr6j2s8.jpeg', price: 79900, mrp: 92900, discount: '14% off', rating: 4.7, reviews: 55000 },
+            { id: 'P006', name: 'Kissan Tomato Ketchup Pouch 450g', image: 'https://rukminim1.flixcart.com/image/312/312/kh0vonk0/sauce-ketchup/h/b/z/450-tomato-pouch-ketchup-surabhi-original-imafx4qktzguhhwy.jpeg', price: 85, mrp: 100, discount: '15% off', rating: 4.1, reviews: 1200 }
+        ];
+
+        const PRODUCT_GROUPS = [
+            { title: "Top Deals for You", tag: "deals", products: MOCK_PRODUCTS },
+            { title: "Electronics & Accessories", tag: "electronics", products: [MOCK_PRODUCTS[2], MOCK_PRODUCTS[4], MOCK_PRODUCTS[3]] },
+            { title: "Home Appliances Steals", tag: "appliances", products: [MOCK_PRODUCTS[0], MOCK_PRODUCTS[1]] },
+            { title: "Everyday Essentials", tag: "essentials", products: [MOCK_PRODUCTS[5], MOCK_PRODUCTS[3]] }
+        ];
+
+        
+        // Expose functions globally
+        window.navigateTo = navigateTo;
+        window.addToCart = addToCart;
+        window.updateCartItemQuantity = updateCartItemQuantity;
+        window.removeFromCart = removeFromCart;
+        window.proceedToCheckout = proceedToCheckout;
+        window.saveAddressAndProceed = saveAddressAndProceed;
+        window.confirmPayment = confirmPayment;
+        
+        document.addEventListener('DOMContentLoaded', initializeApp);
+
+        function showLoading() {
+            document.getElementById('loading-overlay').classList.remove('hidden');
+        }
+
+        function hideLoading() {
+            document.getElementById('loading-overlay').classList.add('hidden');
+        }
+
+        /**
+         * Custom Modal implementation to replace alert/confirm
+         */
+        function showModal(title, message, isConfirm = false) {
+            return new Promise(resolve => {
+                const modal = document.getElementById('status-modal');
+                document.getElementById('modal-title').textContent = title;
+                document.getElementById('modal-message').textContent = message;
+                
+                const closeBtn = document.getElementById('modal-close');
+                const confirmBtn = document.getElementById('modal-confirm');
+
+                closeBtn.onclick = null;
+                confirmBtn.onclick = null;
+
+                if (isConfirm) {
+                    confirmBtn.classList.remove('hidden');
+                    closeBtn.textContent = 'Cancel';
+                    confirmBtn.onclick = () => { modal.classList.add('hidden'); resolve(true); };
+                    closeBtn.onclick = () => { modal.classList.add('hidden'); resolve(false); };
+                } else {
+                    confirmBtn.classList.add('hidden');
+                    closeBtn.textContent = 'Close';
+                    closeBtn.onclick = () => { modal.classList.add('hidden'); resolve(true); };
+                }
+                modal.classList.remove('hidden');
+            });
+        }
+
+
+        // --- Firebase/Auth/Database Setup ---
+
+        async function initializeApp() {
+            showLoading();
+            try {
+                app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                auth = getAuth(app);
+                
+                if (initialAuthToken) {
+                    await signInWithCustomToken(auth, initialAuthToken);
+                } else {
+                    await signInAnonymously(auth);
+                }
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        userId = user.uid;
+                        isAuthReady = true;
+                        document.getElementById('user-display-name').textContent = 'User ' + userId.substring(0, 5) + '...';
+                        console.log("Firebase Auth Ready. User ID:", userId);
+                        
+                        listenToCartData();
+                        fetchUserData();
+                        
+                        navigateTo('home');
+                    } else {
+                        userId = null;
+                        isAuthReady = true;
+                        document.getElementById('user-display-name').textContent = 'Guest';
+                        if (unsubscribeCart) { unsubscribeCart(); }
+                        navigateTo('home');
+                    }
+                    hideLoading();
+                });
+
+            } catch (error) {
+                console.error("Firebase initialization failed:", error);
+                hideLoading();
+                showModal("Error", "Failed to initialize the application.");
+            }
+        }
+        
+        function getCartDocRef() {
+            if (!userId) { console.error("User ID is not available."); return null; }
+            return doc(db, CART_COLLECTION_PATH, userId, 'shopping', 'cart');
+        }
+
+        function getUserDocRef() {
+            if (!userId) return null;
+            return doc(db, CART_COLLECTION_PATH, userId, 'profile', 'data');
+        }
+
+        async function fetchUserData() {
+            const docRef = getUserDocRef();
+            if (!docRef) return;
+
+            try {
+                const docSnap = await getDoc(docRef);
+                if (docSnap.exists() && docSnap.data().address) {
+                    userData = docSnap.data();
+                } else {
+                    await setDoc(docRef, userData, { merge: true });
+                }
+            } catch (error) {
+                console.error("Error fetching user data:", error);
+            }
+        }
+        
+        // --- Cart Data Listener ---
+        function listenToCartData() {
+            if (unsubscribeCart) { unsubscribeCart(); }
+
+            const docRef = getCartDocRef();
+            if (!docRef) return;
+
+            unsubscribeCart = onSnapshot(docRef, (docSnap) => {
+                if (docSnap.exists()) {
+                    cartData = docSnap.data();
+                    cartData.items = cartData.items || [];
+                    cartData.count = cartData.items.reduce((sum, item) => sum + item.quantity, 0);
+                    cartData.total = cartData.items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+                } else {
+                    cartData = { items: [], total: 0, count: 0 };
+                    setDoc(docRef, cartData, { merge: true }).catch(e => console.error("Error creating cart doc:", e));
+                }
+                updateUI();
+            }, (error) => {
+                console.error("Error listening to cart data:", error);
+                showModal("Database Error", "Failed to fetch real-time cart data.");
+            });
+        }
+
+        function updateUI() {
+            document.getElementById('cart-count-badge').textContent = cartData.count;
+            
+            const currentPage = document.getElementById('app-container').dataset.page;
+            if (['cart', 'address', 'payment', 'orders'].includes(currentPage)) {
+                 renderPage(currentPage);
+            }
+        }
+
+        // --- Business Logic (Add/Update/Remove/Order) ---
+
+        async function addToCart(productId) {
+            if (!isAuthReady) { showModal("Access Denied", "Please wait for connection before adding items."); return; }
+            showLoading();
+
+            const product = MOCK_PRODUCTS.find(p => p.id === productId);
+            if (!product) { hideLoading(); showModal("Error", "Product not found."); return; }
+
+            const docRef = getCartDocRef();
+ 
