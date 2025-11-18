@@ -1,274 +1,1215 @@
-<!doctype html>
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Flipkart-style One-Page Shop (Demo)</title>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <style>
-    /* --- Minimal Flipkart-like styling (single-file) --- */
-    :root{--fk-blue:#2874f0;--fk-dark:#1a2a4a;--muted:#6b7280}
-    *{box-sizing:border-box}
-    body{font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial; margin:0;background:#f1f5f9;color:#0f172a}
-    a{color:inherit;text-decoration:none}/* header */
-header{background:var(--fk-blue);color:white;position:fixed;top:0;left:0;right:0;z-index:40}
-.nav{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:16px;padding:12px}
-.logo{display:flex;align-items:center;gap:8px}
-.logo img{height:34px}
-.search{flex:1;display:flex;align-items:center;background:white;padding:8px;border-radius:4px;min-width:250px}
-.search input{flex:1;border:0;outline:none;padding:6px;font-size:14px}
-.nav-right{display:flex;align-items:center;gap:14px}
-.btn{background:white;color:var(--fk-blue);padding:8px 12px;border-radius:4px;font-weight:700;cursor:pointer}
-.cart-btn{display:flex;align-items:center;gap:8px}
-.badge{background:#ff3b30;color:white;border-radius:999px;padding:2px 6px;font-size:12px}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flipkart Clone - Online Shopping</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-/* categories row */
-.categories{max-width:1200px;margin:84px auto 12px;display:flex;gap:12px;padding:12px;overflow:auto}
-.cat{background:white;border-radius:6px;padding:10px 12px;min-width:84px;text-align:center}
-.cat img{height:48px}
+        :root {
+            --primary: #2874f0;
+            --secondary: #fb641b;
+            --light: #f1f3f6;
+            --dark: #212121;
+            --gray: #878787;
+            --white: #ffffff;
+        }
 
-/* main grid */
-.main{max-width:1200px;margin:12px auto;padding:12px;display:grid;grid-template-columns:240px 1fr;gap:16px}
-.filters{background:white;border-radius:8px;padding:12px;height:fit-content}
-.products{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.card{background:white;border-radius:8px;padding:12px;display:flex;flex-direction:column;align-items:center;position:relative}
-.card img{width:140px;height:140px;object-fit:contain}
-.title{font-size:14px;margin-top:8px;text-align:center}
-.price-row{margin-top:8px;display:flex;gap:8px;align-items:center}
-.price{font-weight:800}
-.muted{color:var(--muted);font-size:13px}
-.buy{margin-top:10px}
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+        }
 
-/* sidebar cart (fixed right) */
-.cart-panel{position:fixed;right:12px;top:84px;width:320px;background:white;border-radius:8px;padding:12px;box-shadow:0 8px 30px rgba(2,6,23,0.12);z-index:50}
-.cart-item{display:flex;gap:10px;align-items:center;padding:8px 0;border-bottom:1px dashed #eee}
-.cart-item img{width:56px;height:56px;object-fit:cover;border-radius:6px}
-.totals{margin-top:8px;display:flex;justify-content:space-between;font-weight:700}
+        /* Header Styles */
+        header {
+            background-color: var(--primary);
+            padding: 10px 20px;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
 
-/* modal */
-.modal-backdrop{position:fixed;inset:0;background:rgba(2,6,23,0.6);display:flex;align-items:center;justify-content:center;z-index:60}
-.modal{background:white;padding:16px;border-radius:8px;max-width:720px;width:96%}
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-/* responsive */
-@media (max-width:1000px){.products{grid-template-columns:repeat(3,1fr)}.main{grid-template-columns:1fr} .cart-panel{position:static;margin:12px auto;right:auto;top:auto;width:auto}}
-@media (max-width:640px){.products{grid-template-columns:repeat(2,1fr)}.nav{padding:10px;gap:8px}.search{display:none}}
+        .logo {
+            display: flex;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+        }
 
-  </style>
+        .logo img {
+            height: 24px;
+            margin-right: 10px;
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: bold;
+            font-style: italic;
+        }
+
+        .logo-text span {
+            color: #ffe500;
+        }
+
+        .search-bar {
+            display: flex;
+            flex: 1;
+            max-width: 500px;
+            margin: 0 20px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 2px 0 0 2px;
+            font-size: 14px;
+        }
+
+        .search-bar button {
+            background-color: white;
+            border: none;
+            padding: 0 15px;
+            border-radius: 0 2px 2px 0;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-link i {
+            margin-right: 5px;
+        }
+
+        .cart-count {
+            background-color: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            position: absolute;
+            top: -5px;
+            right: -10px;
+        }
+
+        .cart-container {
+            position: relative;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+
+        .categories {
+            display: flex;
+            overflow-x: auto;
+            padding: 15px 0;
+            margin-bottom: 20px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .category {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 15px;
+            text-decoration: none;
+            color: var(--dark);
+            min-width: 80px;
+        }
+
+        .category img {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 5px;
+        }
+
+        .category span {
+            font-size: 12px;
+            text-align: center;
+        }
+
+        /* Product Grid */
+        .section-title {
+            font-size: 22px;
+            margin: 25px 0 15px;
+            font-weight: 600;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background-color: white;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            padding: 10px;
+            background-color: #f8f8f8;
+        }
+
+        .product-info {
+            padding: 15px;
+        }
+
+        .product-title {
+            font-size: 14px;
+            margin-bottom: 10px;
+            height: 40px;
+            overflow: hidden;
+        }
+
+        .product-price {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .current-price {
+            font-size: 18px;
+            font-weight: 600;
+            margin-right: 10px;
+        }
+
+        .original-price {
+            font-size: 14px;
+            color: var(--gray);
+            text-decoration: line-through;
+            margin-right: 10px;
+        }
+
+        .discount {
+            color: #388e3c;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .add-to-cart {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 10px;
+            border-radius: 3px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background-color: #1c65e0;
+        }
+
+        /* Cart Page */
+        .cart-page, .payment-page {
+            background-color: white;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item-image {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            margin-right: 15px;
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-title {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-price {
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+        }
+
+        .quantity-btn {
+            width: 30px;
+            height: 30px;
+            border: 1px solid #ddd;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .quantity-input {
+            width: 40px;
+            height: 30px;
+            border: 1px solid #ddd;
+            border-left: none;
+            border-right: none;
+            text-align: center;
+        }
+
+        .remove-btn {
+            background: none;
+            border: none;
+            color: var(--primary);
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .cart-summary {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .total {
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .checkout-btn {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 12px;
+            border-radius: 3px;
+            font-weight: 500;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        /* Payment Page */
+        .payment-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            font-size: 14px;
+        }
+
+        .payment-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .payment-method {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .payment-method.selected {
+            border-color: var(--primary);
+            background-color: #f0f7ff;
+        }
+
+        .payment-method input {
+            margin-right: 10px;
+        }
+
+        .payment-logo {
+            width: 40px;
+            margin-right: 10px;
+        }
+
+        .place-order-btn {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 12px;
+            border-radius: 3px;
+            font-weight: 500;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        /* Product Detail Page */
+        .product-detail {
+            display: flex;
+            background-color: white;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .product-detail-image {
+            width: 40%;
+            max-width: 400px;
+            object-fit: contain;
+            margin-right: 30px;
+        }
+
+        .product-detail-info {
+            flex: 1;
+        }
+
+        .product-detail-title {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .product-detail-rating {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .rating-stars {
+            color: #ffe500;
+            margin-right: 10px;
+        }
+
+        .product-detail-price {
+            margin-bottom: 20px;
+        }
+
+        .product-detail-description {
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .product-detail-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .buy-now-btn {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 3px;
+            font-weight: 500;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 50px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .footer-column h3 {
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: #878787;
+            text-transform: uppercase;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .footer-column ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            margin-top: 20px;
+            border-top: 1px solid #454545;
+            font-size: 14px;
+            color: #878787;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-wrap: wrap;
+            }
+            
+            .search-bar {
+                order: 3;
+                max-width: 100%;
+                margin: 10px 0 0;
+            }
+            
+            .product-detail {
+                flex-direction: column;
+            }
+            
+            .product-detail-image {
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+            
+            .payment-form {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Hidden class for page navigation */
+        .page {
+            display: none;
+        }
+
+        .active {
+            display: block;
+        }
+    </style>
 </head>
 <body>
-  <!-- HEADER (Flipkart-like) -->
-  <header>
-    <div class="nav">
-      <div class="logo">
-        <img src="https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/fk-plus_3b0baa.png" alt="logo">
-      </div>
-      <div class="search">
-        <input id="searchInput" placeholder="Search for products, brands and more" />
-        <span class="material-icons" style="color:var(--fk-blue)">search</span>
-      </div>
-      <div class="nav-right">
-        <div class="muted">Hello, Guest</div>
-        <button id="openCartBtnTop" class="btn cart-btn"> <span class="material-icons">shopping_cart</span> Cart <span id="topBadge" class="badge">0</span></button>
-      </div>
-    </div>
-  </header>  <!-- category row -->  <div class="categories" id="categories"></div>  <!-- main layout -->  <div class="main">
-    <!-- left filters (static) -->
-    <aside class="filters">
-      <h3>Filters</h3>
-      <div style="margin-top:8px">
-        <label class="muted">Price range</label>
-        <div style="display:flex;gap:8px;margin-top:6px"><input placeholder="Min" style="width:46%"/><input placeholder="Max" style="width:46%"/></div>
-      </div>
-      <div style="margin-top:12px">
-        <label class="muted">Categories</label>
-        <div style="margin-top:8px;display:flex;flex-direction:column;gap:6px">
-          <label><input type="checkbox" checked /> Electronics</label>
-          <label><input type="checkbox" /> Home</label>
-          <label><input type="checkbox" /> Fashion</label>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="#" class="logo" onclick="showPage('home')">
+                <div class="logo-text">Flipkart<span>Clone</span></div>
+            </a>
+            
+            <div class="search-bar">
+                <input type="text" placeholder="Search for products, brands and more">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+            
+            <div class="nav-links">
+                <a href="#" class="nav-link" onclick="showPage('login')">
+                    <i class="fas fa-user"></i>
+                    <span>Login</span>
+                </a>
+                <a href="#" class="nav-link">
+                    <i class="fas fa-box"></i>
+                    <span>Orders</span>
+                </a>
+                <div class="cart-container">
+                    <a href="#" class="nav-link" onclick="showPage('cart')">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Cart</span>
+                        <div class="cart-count" id="cart-count">0</div>
+                    </a>
+                </div>
+            </div>
         </div>
-      </div>
-    </aside><!-- product grid -->
-<section>
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-    <h2>Featured Products</h2>
-    <div class="muted">Showing <span id="productsCount">0</span> items</div>
-  </div>
+    </header>
 
-  <div class="products" id="products"></div>
+    <!-- Home Page -->
+    <div id="home" class="page active">
+        <div class="container">
+            <!-- Categories -->
+            <div class="categories">
+                <a href="#" class="category">
+                    <img src="https://via.placeholder.com/50" alt="Grocery">
+                    <span>Grocery</span>
+                </a>
+                <a href="#" class="category">
+                    <img src="https://via.placeholder.com/50" alt="Mobiles">
+                    <span>Mobiles</span>
+                </a>
+                <a href="#" class="category">
+                    <img src="https://via.placeholder.com/50" alt="Fashion">
+                    <span>Fashion</span>
+                </a>
+                <a href="#" class="category">
+                    <img src="https://via.placeholder.com/50" alt="Electronics">
+                    <span>Electronics</span>
+                </a>
+                <a href="#" class="category">
+                    <img src="https://via.placeholder.com/50" alt="Home">
+                    <span>Home</span>
+                </a>
+                <a href="#" class="category">
+                    <img src="https://via.placeholder.com/50" alt="Appliances">
+                    <span>Appliances</span>
+                </a>
+                <a href="#" class="category">
+                    <img src="https://via.placeholder.com/50" alt="Travel">
+                    <span>Travel</span>
+                </a>
+                <a href="#" class="category">
+                    <img src="https://via.placeholder.com/50" alt="Toys">
+                    <span>Toys</span>
+                </a>
+            </div>
 
-</section>
+            <!-- Deals of the Day -->
+            <h2 class="section-title">Deals of the Day</h2>
+            <div class="products-grid">
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/220x200?text=Smartphone" alt="Smartphone" class="product-image">
+                    <div class="product-info">
+                        <div class="product-title">Samsung Galaxy M34 5G (Midnight Blue, 128 GB)</div>
+                        <div class="product-price">
+                            <div class="current-price">₹18,999</div>
+                            <div class="original-price">₹22,999</div>
+                            <div class="discount">17% off</div>
+                        </div>
+                        <button class="add-to-cart" onclick="addToCart(1, 'Samsung Galaxy M34 5G', 18999, 'https://via.placeholder.com/220x200?text=Smartphone')">Add to Cart</button>
+                    </div>
+                </div>
 
-  </div>  <!-- floating cart panel -->  <div class="cart-panel" id="cartPanel">
-    <h3>Your Cart</h3>
-    <div id="cartList"></div>
-    <div class="totals"><div>Subtotal</div><div id="subtotal">₹0</div></div>
-    <div style="margin-top:10px;display:flex;gap:8px">
-      <button id="checkoutBtn" class="btn" style="flex:1">Checkout</button>
-      <button id="clearBtn" class="btn" style="background:#eef3ff;color:var(--fk-blue);">Clear</button>
-    </div>
-  </div>  <!-- modal root -->  <div id="modalRoot"></div>  <script>
-    // Product data (same items as demo)
-    const PRODUCTS = [
-      { id: 'p1', title: 'Aurora Headphones', price: 2499, desc: 'Wireless noise-canceling', img: 'https://rukminim1.flixcart.com/image/312/312/k0wqwsw0/headphone/q/r/1/airdopes-original-imafkfy7.jpg' },
-      { id: 'p2', title: 'Nebula Watch', price: 4999, desc: 'Smart watch with sensors', img: 'https://rukminim1.flixcart.com/image/312/312/j6q3t8w0/smartwatch/g/u/0/fitbit-original-imafk3.jpg' },
-      { id: 'p3', title: 'Comet Backpack', price: 1999, desc: 'Water-resistant 25L', img: 'https://rukminim1.flixcart.com/image/312/312/ki3gknk0/backpack.jpg' },
-      { id: 'p4', title: 'Stellar Lamp', price: 899, desc: 'Mood lamp with colors', img: 'https://rukminim1.flixcart.com/image/312/312/k0wqwsw0/lamp.jpg' },
-      { id: 'p5', title: 'Pixel Speaker', price: 1299, desc: 'Portable bluetooth speaker', img: 'https://rukminim1.flixcart.com/image/312/312/ksdjma80/speaker.jpg' },
-      { id: 'p6', title: 'Zenphone Case', price: 399, desc: 'Shockproof case', img: 'https://rukminim1.flixcart.com/image/312/312/case.jpg' },
-      { id: 'p7', title: 'Pro Charger', price: 599, desc: 'Fast charging 30W', img: 'https://rukminim1.flixcart.com/image/312/312/charger.jpg' },
-      { id: 'p8', title: 'Lens Kit', price: 3499, desc: 'Camera lens set', img: 'https://rukminim1.flixcart.com/image/312/312/lens.jpg' }
-    ];
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/220x200?text=Headphones" alt="Headphones" class="product-image">
+                    <div class="product-info">
+                        <div class="product-title">boAt Rockerz 450 Bluetooth Headset</div>
+                        <div class="product-price">
+                            <div class="current-price">₹1,599</div>
+                            <div class="original-price">₹4,999</div>
+                            <div class="discount">68% off</div>
+                        </div>
+                        <button class="add-to-cart" onclick="addToCart(2, 'boAt Rockerz 450 Bluetooth Headset', 1599, 'https://via.placeholder.com/220x200?text=Headphones')">Add to Cart</button>
+                    </div>
+                </div>
 
-    // categories (simple)
-    const CATS = [ 'Top Offers','Grocery','Mobiles','Fashion','Electronics','Home','Appliances','Travel','Beauty' ];
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/220x200?text=Smart+Watch" alt="Smart Watch" class="product-image">
+                    <div class="product-info">
+                        <div class="product-title">Noise ColorFit Pulse Grand Smart Watch</div>
+                        <div class="product-price">
+                            <div class="current-price">₹1,799</div>
+                            <div class="original-price">₹4,999</div>
+                            <div class="discount">64% off</div>
+                        </div>
+                        <button class="add-to-cart" onclick="addToCart(3, 'Noise ColorFit Pulse Grand Smart Watch', 1799, 'https://via.placeholder.com/220x200?text=Smart+Watch')">Add to Cart</button>
+                    </div>
+                </div>
 
-    // cart persistence
-    const storeKey = 'fk_style_cart_v1';
-    let cart = JSON.parse(localStorage.getItem(storeKey) || '[]');
+                <!-- Product 4 -->
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/220x200?text=Shoes" alt="Shoes" class="product-image">
+                    <div class="product-info">
+                        <div class="product-title">Nike Revolution 6 Running Shoes For Men</div>
+                        <div class="product-price">
+                            <div class="current-price">₹2,995</div>
+                            <div class="original-price">₹4,295</div>
+                            <div class="discount">30% off</div>
+                        </div>
+                        <button class="add-to-cart" onclick="addToCart(4, 'Nike Revolution 6 Running Shoes', 2995, 'https://via.placeholder.com/220x200?text=Shoes')">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
 
-    function money(v){ return '₹' + Number(v).toLocaleString('en-IN') }
+            <!-- Top Offers -->
+            <h2 class="section-title">Top Offers</h2>
+            <div class="products-grid">
+                <!-- Product 5 -->
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/220x200?text=Laptop" alt="Laptop" class="product-image">
+                    <div class="product-info">
+                        <div class="product-title">HP 15s, 11th Gen Intel Core i3, 8GB RAM/512GB SSD</div>
+                        <div class="product-price">
+                            <div class="current-price">₹39,999</div>
+                            <div class="original-price">₹54,999</div>
+                            <div class="discount">27% off</div>
+                        </div>
+                        <button class="add-to-cart" onclick="addToCart(5, 'HP 15s Laptop', 39999, 'https://via.placeholder.com/220x200?text=Laptop')">Add to Cart</button>
+                    </div>
+                </div>
 
-    // render categories
-    const categoriesEl = document.getElementById('categories');
-    categoriesEl.innerHTML = CATS.map(c=>`<div class="cat"><img src="https://rukminim1.flixcart.com/flap/128/128/image/f15c02bfeb02d15d.png" alt=""><div style="margin-top:6px;font-size:13px">${c}</div></div>`).join('');
+                <!-- Product 6 -->
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/220x200?text=TV" alt="TV" class="product-image">
+                    <div class="product-info">
+                        <div class="product-title">Mi 5X 108 cm (43 inch) Ultra HD (4K) LED Smart Android TV</div>
+                        <div class="product-price">
+                            <div class="current-price">₹26,999</div>
+                            <div class="original-price">₹39,999</div>
+                            <div class="discount">32% off</div>
+                        </div>
+                        <button class="add-to-cart" onclick="addToCart(6, 'Mi 5X 43 inch TV', 26999, 'https://via.placeholder.com/220x200?text=TV')">Add to Cart</button>
+                    </div>
+                </div>
 
-    // render products
-    const productsEl = document.getElementById('products');
-    function renderProducts(){
-      productsEl.innerHTML = PRODUCTS.map(p=>`
-        <div class="card">
-          <img src="${p.img}" alt="${p.title}" />
-          <div class="title">${p.title}</div>
-          <div class="muted">${p.desc}</div>
-          <div class="price-row">
-            <div class="price">${money(p.price)}</div>
-            <div class="muted" style="font-size:12px">incl. taxes</div>
-          </div>
-          <div class="buy">
-            <button class="btn" data-id="${p.id}">Buy</button>
-            <button class="btn" style="background:#f3f4f6;color:#111;margin-left:8px" data-id="${p.id}" data-action="add">Add</button>
-          </div>
+                <!-- Product 7 -->
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/220x200?text=Backpack" alt="Backpack" class="product-image">
+                    <div class="product-info">
+                        <div class="product-title">Skybags Brat Black 46 Cms Casual Backpack</div>
+                        <div class="product-price">
+                            <div class="current-price">₹899</div>
+                            <div class="original-price">₹2,199</div>
+                            <div class="discount">59% off</div>
+                        </div>
+                        <button class="add-to-cart" onclick="addToCart(7, 'Skybags Brat Backpack', 899, 'https://via.placeholder.com/220x200?text=Backpack')">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- Product 8 -->
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/220x200?text=Speaker" alt="Speaker" class="product-image">
+                    <div class="product-info">
+                        <div class="product-title">JBL Go 3, Wireless Portable Bluetooth Speaker</div>
+                        <div class="product-price">
+                            <div class="current-price">₹2,999</div>
+                            <div class="original-price">₹4,499</div>
+                            <div class="discount">33% off</div>
+                        </div>
+                        <button class="add-to-cart" onclick="addToCart(8, 'JBL Go 3 Speaker', 2999, 'https://via.placeholder.com/220x200?text=Speaker')">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
         </div>
-      `).join('');
-
-      // attach events
-      document.querySelectorAll('.card .btn[data-id]').forEach(btn=>{
-        btn.addEventListener('click', e=>{
-          const id = e.currentTarget.dataset.id;
-          const act = e.currentTarget.dataset.action;
-          if(act === 'add') { addToCart(id,1); showPanel(); }
-          else { addToCart(id,1); openCheckoutModal(); }
-        })
-      })
-      document.getElementById('productsCount').textContent = PRODUCTS.length;
-    }
-
-    // cart UI
-    const cartListEl = document.getElementById('cartList');
-    const subtotalEl = document.getElementById('subtotal');
-    const topBadge = document.getElementById('topBadge');
-
-    function updateCartUI(){
-      topBadge.textContent = cart.reduce((s,i)=>s+i.qty,0);
-      if(cart.length===0){ cartListEl.innerHTML = '<div class="muted">Your cart is empty</div>'; subtotalEl.textContent = money(0); return; }
-      cartListEl.innerHTML = cart.map(it=>{
-        const p = PRODUCTS.find(x=>x.id===it.id);
-        return `
-          <div class="cart-item">
-            <img src="${p.img}" />
-            <div style="flex:1">
-              <div style="font-weight:700">${p.title}</div>
-              <div class="muted">${money(p.price)}</div>
-              <div style="margin-top:6px;display:flex;gap:6px;align-items:center">
-                <button class="btn secondary" data-id="${it.id}" data-op="-">-</button>
-                <div class="muted">Qty ${it.qty}</div>
-                <button class="btn" data-id="${it.id}" data-op="+">+</button>
-                <button class="btn" data-id="${it.id}" data-op="remove" style="background:#fff;color:#f43f5e;border:1px solid #ffdfe3;margin-left:8px">Remove</button>
-              </div>
-            </div>
-          </div>
-        `
-      }).join('');
-
-      // attach cart ops
-      document.querySelectorAll('[data-op]').forEach(b=>b.addEventListener('click', e=>{
-        const id = e.currentTarget.dataset.id; const op = e.currentTarget.dataset.op;
-        if(op === '+') changeQty(id,1);
-        else if(op === '-') changeQty(id,-1);
-        else if(op === 'remove') removeFromCart(id);
-      }));
-
-      const subtotal = cart.reduce((s,i)=> s + (PRODUCTS.find(p=>p.id===i.id).price * i.qty), 0);
-      subtotalEl.textContent = money(subtotal);
-      localStorage.setItem(storeKey, JSON.stringify(cart));
-    }
-
-    function addToCart(id, qty=1){ const idx = cart.findIndex(i=>i.id===id); if(idx===-1) cart.push({id,qty}); else cart[idx].qty += qty; updateCartUI(); }
-    function changeQty(id, delta){ const idx = cart.findIndex(i=>i.id===id); if(idx===-1) return; cart[idx].qty += delta; if(cart[idx].qty<=0) cart.splice(idx,1); updateCartUI(); }
-    function removeFromCart(id){ cart = cart.filter(i=>i.id!==id); updateCartUI(); }
-    function clearCart(){ cart = []; updateCartUI(); }
-
-    document.getElementById('clearBtn').addEventListener('click', ()=>{ clearCart(); });
-    document.getElementById('openCartBtnTop').addEventListener('click', ()=>{ document.getElementById('cartPanel').scrollIntoView({behavior:'smooth'}); });
-    function showPanel(){ document.getElementById('cartPanel').style.boxShadow = '0 18px 50px rgba(2,6,23,0.18)'; setTimeout(()=>document.getElementById('cartPanel').style.boxShadow='',900); }
-
-    // checkout modal
-    const modalRoot = document.getElementById('modalRoot');
-    function openCheckoutModal(){
-      if(!cart.length){ alert('Cart is empty'); return; }
-      const subtotal = cart.reduce((s,i)=> s + (PRODUCTS.find(p=>p.id===i.id).price * i.qty), 0);
-      const fees = Math.round(subtotal*0.03);
-      const grand = subtotal + fees;
-      modalRoot.innerHTML = `
-        <div class="modal-backdrop" id="backdrop">
-          <div class="modal">
-            <div style="display:flex;justify-content:space-between;align-items:center"><h3>Checkout</h3><button id="closeModalBtn" class="btn" style="background:#f3f4f6;color:#111">Close</button></div>
-            <div style="display:flex;gap:12px;margin-top:12px">
-              <div style="flex:1">
-                <input id="nameInput" placeholder="Full name" style="width:100%;padding:8px;margin-bottom:8px" />
-                <input id="emailInput" placeholder="Email" style="width:100%;padding:8px;margin-bottom:8px" />
-                <textarea id="addressInput" placeholder="Address" rows="3" style="width:100%;padding:8px"></textarea></div>
-          <div style="width:280px">
-            <h4>Order summary</h4>
-            <div style="max-height:260px;overflow:auto;margin-top:8px;">
-              ${cart.map(it=>{ const p = PRODUCTS.find(x=>x.id===it.id); return `<div style="display:flex;justify-content:space-between;margin-bottom:6px"><div>${p.title} × ${it.qty}</div><div>${money(p.price*it.qty)}</div></div>` }).join('')}
-            </div>
-            <div style="border-top:1px dashed #eee;margin-top:8px;padding-top:8px">
-              <div style="display:flex;justify-content:space-between"><div class="muted">Subtotal</div><div>${money(subtotal)}</div></div>
-              <div style="display:flex;justify-content:space-between"><div class="muted">Fees</div><div>${money(fees)}</div></div>
-              <div style="display:flex;justify-content:space-between;font-weight:800;margin-top:8px"><div>Total</div><div>${money(grand)}</div></div>
-            </div>
-            <div style="margin-top:10px;display:flex;gap:8px">
-              <button id="confirmBtn" class="btn" style="flex:1">Confirm</button>
-              <button id="payLaterBtn" class="btn" style="background:#eef3ff;color:var(--fk-blue)">Pay Later</button>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
-  `;
 
-  document.getElementById('closeModalBtn').addEventListener('click', ()=> modalRoot.innerHTML='');
-  document.getElementById('backdrop').addEventListener('click', e=>{ if(e.target.id==='backdrop') modalRoot.innerHTML=''; });
-  document.getElementById('confirmBtn').addEventListener('click', ()=>{
-    const name = document.getElementById('nameInput').value.trim();
-    const email = document.getElementById('emailInput').value.trim();
-    if(!name || !email){ alert('Please enter name and email'); return; }
-    document.getElementById('confirmBtn').textContent='Processing...';
-    setTimeout(()=>{
-      modalRoot.innerHTML = `<div class="modal-backdrop"><div class="modal" style="text-align:center"><h3>Order placed</h3><p class="muted">Thanks ${name} — your order is confirmed (demo)</p><div style="margin-top:12px"><button id="closeDone" class="btn">Close</button></div></div></div>`;
-      clearCart();
-      document.getElementById('closeDone').addEventListener('click', ()=> modalRoot.innerHTML='');
-    },900);
-  });
+    <!-- Product Detail Page -->
+    <div id="product-detail" class="page">
+        <div class="container">
+            <div class="product-detail">
+                <img src="https://via.placeholder.com/400x400?text=Product+Image" alt="Product" class="product-detail-image">
+                <div class="product-detail-info">
+                    <h1 class="product-detail-title" id="detail-title">Product Title</h1>
+                    <div class="product-detail-rating">
+                        <div class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <span>12,345 Ratings & 2,345 Reviews</span>
+                    </div>
+                    <div class="product-detail-price">
+                        <div class="current-price" id="detail-price">₹18,999</div>
+                        <div class="original-price">₹22,999</div>
+                        <div class="discount">17% off</div>
+                    </div>
+                    <p class="product-detail-description" id="detail-description">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    </p>
+                    <div class="product-detail-actions">
+                        <button class="add-to-cart" id="detail-add-to-cart">Add to Cart</button>
+                        <button class="buy-now-btn" onclick="showPage('payment')">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-  document.getElementById('payLaterBtn').addEventListener('click', ()=>{ alert('Order saved for later (demo)'); modalRoot.innerHTML=''; });
-}
+    <!-- Cart Page -->
+    <div id="cart" class="page">
+        <div class="container">
+            <h2 class="section-title">My Cart</h2>
+            <div class="cart-page">
+                <div id="cart-items">
+                    <!-- Cart items will be dynamically added here -->
+                </div>
+                <div class="cart-summary">
+                    <div class="summary-row">
+                        <span>Total Items:</span>
+                        <span id="total-items">0</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Delivery Charges:</span>
+                        <span>FREE</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Total Amount:</span>
+                        <span id="total-amount">₹0</span>
+                    </div>
+                    <button class="checkout-btn" onclick="showPage('payment')">Proceed to Checkout</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-// initial render
-renderProducts(); updateCartUI();
+    <!-- Payment Page -->
+    <div id="payment" class="page">
+        <div class="container">
+            <h2 class="section-title">Checkout</h2>
+            <div class="payment-page">
+                <h3>Delivery Address</h3>
+                <div class="payment-form">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" placeholder="Enter your full name">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" placeholder="Enter your phone number">
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <input type="text" id="address" placeholder="Enter your address">
+                    </div>
+                    <div class="form-group">
+                        <label for="city">City</label>
+                        <input type="text" id="city" placeholder="Enter your city">
+                    </div>
+                    <div class="form-group">
+                        <label for="state">State</label>
+                        <input type="text" id="state" placeholder="Enter your state">
+                    </div>
+                    <div class="form-group">
+                        <label for="pincode">Pincode</label>
+                        <input type="text" id="pincode" placeholder="Enter your pincode">
+                    </div>
+                </div>
 
-  </script>
+                <h3>Payment Method</h3>
+                <div class="payment-methods">
+                    <label class="payment-method selected">
+                        <input type="radio" name="payment" value="card" checked>
+                        <img src="https://via.placeholder.com/40x25?text=Card" alt="Card" class="payment-logo">
+                        Credit/Debit Card
+                    </label>
+                    <label class="payment-method">
+                        <input type="radio" name="payment" value="upi">
+                        <img src="https://via.placeholder.com/40x25?text=UPI" alt="UPI" class="payment-logo">
+                        UPI
+                    </label>
+                    <label class="payment-method">
+                        <input type="radio" name="payment" value="cod">
+                        <img src="https://via.placeholder.com/40x25?text=COD" alt="COD" class="payment-logo">
+                        Cash on Delivery
+                    </label>
+                </div>
+
+                <div class="cart-summary">
+                    <div class="summary-row">
+                        <span>Total Items:</span>
+                        <span id="payment-total-items">0</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Delivery Charges:</span>
+                        <span>FREE</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Total Amount:</span>
+                        <span id="payment-total-amount">₹0</span>
+                    </div>
+                    <button class="place-order-btn" onclick="placeOrder()">Place Order</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Page -->
+    <div id="login" class="page">
+        <div class="container">
+            <div class="cart-page" style="max-width: 400px; margin: 50px auto;">
+                <h2 style="text-align: center; margin-bottom: 20px;">Login</h2>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Enter your password">
+                </div>
+                <button class="checkout-btn" style="margin-top: 20px;" onclick="showPage('home')">Login</button>
+                <p style="text-align: center; margin-top: 15px;">
+                    New to Flipkart Clone? <a href="#" style="color: var(--primary);">Create an account</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>About</h3>
+                <ul>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Flipkart Stories</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Help</h3>
+                <ul>
+                    <li><a href="#">Payments</a></li>
+                    <li><a href="#">Shipping</a></li>
+                    <li><a href="#">Cancellation & Returns</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Policy</h3>
+                <ul>
+                    <li><a href="#">Return Policy</a></li>
+                    <li><a href="#">Terms Of Use</a></li>
+                    <li><a href="#">Security</a></li>
+                    <li><a href="#">Privacy</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Social</h3>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">YouTube</a></li>
+                    <li><a href="#">Instagram</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            © 2023 Flipkart Clone. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // Cart data
+        let cart = [];
+        
+        // Demo product data
+        const products = {
+            1: {
+                id: 1,
+                name: "Samsung Galaxy M34 5G (Midnight Blue, 128 GB)",
+                price: 18999,
+                image: "https://via.placeholder.com/220x200?text=Smartphone",
+                description: "Experience the power of 5G with the Samsung Galaxy M34. Featuring a 6.5-inch Super AMOLED display, 6000mAh battery, and a versatile triple camera setup. Perfect for gaming, streaming, and productivity."
+            },
+            2: {
+                id: 2,
+                name: "boAt Rockerz 450 Bluetooth Headset",
+                price: 1599,
+                image: "https://via.placeholder.com/220x200?text=Headphones",
+                description: "Enjoy immersive audio with the boAt Rockerz 450. These over-ear headphones feature 40mm drivers, up to 15 hours of playback, and plush ear cushions for comfortable listening sessions."
+            },
+            3: {
+                id: 3,
+                name: "Noise ColorFit Pulse Grand Smart Watch",
+                price: 1799,
+                image: "https://via.placeholder.com/220x200?text=Smart+Watch",
+                description: "Stay connected and track your fitness with the Noise ColorFit Pulse Grand. Features a 1.69-inch display, heart rate monitoring, SpO2 tracking, and 10+ sports modes."
+            },
+            4: {
+                id: 4,
+                name: "Nike Revolution 6 Running Shoes For Men",
+                price: 2995,
+                image: "https://via.placeholder.com/220x200?text=Shoes",
+                description: "Step up your running game with the Nike Revolution 6. These lightweight shoes feature a soft foam midsole for comfort and a durable rubber outsole for traction on various surfaces."
+            },
+            5: {
+                id: 5,
+                name: "HP 15s, 11th Gen Intel Core i3, 8GB RAM/512GB SSD",
+                price: 39999,
+                image: "https://via.placeholder.com/220x200?text=Laptop",
+                description: "Power through your day with the HP 15s laptop. Featuring an 11th Gen Intel Core i3 processor, 8GB RAM, 512GB SSD, and a 15.6-inch display. Perfect for work, study, and entertainment."
+            },
+            6: {
+                id: 6,
+                name: "Mi 5X 108 cm (43 inch) Ultra HD (4K) LED Smart Android TV",
+                price: 26999,
+                image: "https://via.placeholder.com/220x200?text=TV",
+                description: "Transform your entertainment with the Mi 5X 4K Android TV. Enjoy stunning 4K visuals, Dolby Audio, and access to thousands of apps via Android TV. With PatchWall, discover content tailored to your preferences."
+            },
+            7: {
+                id: 7,
+                name: "Skybags Brat Black 46 Cms Casual Backpack",
+                price: 899,
+                image: "https://via.placeholder.com/220x200?text=Backpack",
+                description: "Carry your essentials in style with the Skybags Brat backpack. Featuring multiple compartments, padded laptop sleeve, and comfortable shoulder straps. Perfect for college, office, or travel."
+            },
+            8: {
+                id: 8,
+                name: "JBL Go 3, Wireless Portable Bluetooth Speaker",
+                price: 2999,
+                image: "https://via.placeholder.com/220x200?text=Speaker",
+                description: "Take your music anywhere with the JBL Go 3. This compact speaker delivers powerful JBL Pro Sound, features IP67 waterproof rating, and offers up to 5 hours of playtime on a single charge."
+            }
+        };
+
+        // Page navigation
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update cart count in header
+            updateCartCount();
+            
+            // If showing cart page, render cart items
+            if (pageId === 'cart') {
+                renderCart();
+            }
+            
+            // If showing payment page, update payment summary
+            if (pageId === 'payment') {
+                updatePaymentSummary();
+            }
+            
+            return false;
+        }
+
+        // Add to cart function
+        function addToCart(productId, productName, productPrice, productImage) {
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: productId,
+                    name: productName,
+                    price: productPrice,
+                    image: productImage,
+                    quantity: 1
+                });
+            }
+            
+            updateCartCount();
+            alert(`${productName} added to cart!`);
+        }
+
+        // Update cart count in header
+        function updateCartCount() {
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            document.getElementById('cart-count').textContent = totalItems;
+        }
+
+        // Render cart items
+        function renderCart() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            const totalItemsElement = document.getElementById('total-items');
+            const totalAmountElement = document.getElementById('total-amount');
+            
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p>Your cart is empty</p>';
+                totalItemsElement.textContent = '0';
+                totalAmountElement.textContent = '₹0';
+                return;
+            }
+            
+            let cartHTML = '';
+            let totalItems = 0;
+            let totalAmount = 0;
+            
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                totalItems += item.quantity;
+                totalAmount += itemTotal;
+                
+                cartHTML += `
+                    <div class="cart-item">
+                        <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                        <div class="cart-item-details">
+                            <div class="cart-item-title">${item.name}</div>
+                            <div class="cart-item-price">₹${item.price.toLocaleString()}</div>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
+                                <input type="text" class="quantity-input" value="${item.quantity}" readonly>
+                                <button class="quantity-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
+                            </div>
+                            <button class="remove-btn" onclick="removeFromCart(${item.id})">Remove</button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            cartItemsContainer.innerHTML = cartHTML;
+            totalItemsElement.textContent = totalItems;
+            totalAmountElement.textContent = `₹${totalAmount.toLocaleString()}`;
+        }
+
+        // Update item quantity in cart
+        function updateQuantity(productId, change) {
+            const item = cart.find(item => item.id === productId);
+            
+            if (item) {
+                item.quantity += change;
+                
+                if (item.quantity <= 0) {
+                    removeFromCart(productId);
+                } else {
+                    renderCart();
+                    updateCartCount();
+                }
+            }
+        }
+
+        // Remove item from cart
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            renderCart();
+            updateCartCount();
+        }
+
+        // Update payment summary
+        function updatePaymentSummary() {
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            const totalAmount = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+            
+            document.getElementById('payment-total-items').textContent = totalItems;
+            document.getElementById('payment-total-amount').textContent = `₹${totalAmount.toLocaleString()}`;
+        }
+
+        // Place order function
+        function placeOrder() {
+            if (cart.length === 0) {
+                alert('Your cart is empty. Please add items to your cart before placing an order.');
+                return;
+            }
+            
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const address = document.getElementById('address').value;
+            
+            if (!name || !phone || !address) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+            
+            alert('Order placed successfully! Thank you for shopping with Flipkart Clone.');
+            
+            // Clear cart
+            cart = [];
+            updateCartCount();
+            
+            // Redirect to home page
+            showPage('home');
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartCount();
+            
+            // Add event listeners to product cards for detail view
+            document.querySelectorAll('.product-card').forEach(card => {
+                card.addEventListener('click', function(e) {
+                    if (!e.target.classList.contains('add-to-cart')) {
+                        const productId = this.querySelector('.add-to-cart').getAttribute('onclick').match(/\d+/)[0];
+                        showProductDetail(productId);
+                    }
+                });
+            });
+        });
+
+        // Show product detail
+        function showProductDetail(productId) {
+            const product = products[productId];
+            
+            if (product) {
+                document.getElementById('detail-title').textContent = product.name;
+                document.getElementById('detail-price').textContent = `₹${product.price.toLocaleString()}`;
+                document.getElementById('detail-description').textContent = product.description;
+                
+                // Update add to cart button
+                const addToCartBtn = document.getElementById('detail-add-to-cart');
+                addToCartBtn.setAttribute('onclick', `addToCart(${product.id}, '${product.name}', ${product.price}, '${product.image}')`);
+                
+                showPage('product-detail');
+            }
+        }
+    </script>
 </body>
 </html>
