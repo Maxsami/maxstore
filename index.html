@@ -1,388 +1,389 @@
-<!DOCTYPE html>
+<!doctype html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flipkart Clone - Fully Functional E-commerce</title>
-    <link rel="shortcut icon" href="https://static-assets-web.flixcart.com/www/promos/new/20150528-140547-favicon-retina.ico" type="image/x-icon">
-    
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Material Icons CDN -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!-- Font Awesome (for the cart icon fallback) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
-    
-    <!-- Custom CSS for the Flipkart look and feel -->
-    <style>
-        /* Define custom colors */
-        :root {
-            --primary-blue: #2874f0;
-            --primary-orange: #ff9f00;
-            --primary-green: #388e3c;
-            --primary-darkBlue: #172337;
-            --primary-grey: #878787;
-        }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>One‑Page Shop — Fully Loaded Theme</title>
+  <style>
+    /* ---------- Reset & Utility ---------- */
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body,#app{height:100%}
+    body{font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background:linear-gradient(180deg,#0f172a 0%, #071033 100%); color:#e6eef8; -webkit-font-smoothing:antialiased}
+    a{color:inherit;text-decoration:none}/* ---------- Container ---------- */n
+.container{max-width:1200px;margin:32px auto;padding:24px}
+.card{background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02)); border:1px solid rgba(255,255,255,0.04); border-radius:14px; padding:18px}
 
-        .bg-primary-blue { background-color: var(--primary-blue); }
-        .text-primary-blue { color: var(--primary-blue); }
-        .bg-primary-orange { background-color: var(--primary-orange); }
-        .bg-primary-green { background-color: var(--primary-green); }
-        .bg-primary-darkBlue { background-color: var(--primary-darkBlue); }
-        .text-primary-grey { color: var(--primary-grey); }
-        .border-primary-blue { border-color: var(--primary-blue); }
+/* ---------- Header ---------- */
+header{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:22px}
+.brand{display:flex;align-items:center;gap:14px}
+.logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,#7c3aed,#06b6d4);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;color:white;box-shadow:0 6px 18px rgba(0,0,0,0.4)}
+.brand h1{font-size:20px;line-height:1}
+.brand p{font-size:12px;color:rgba(230,238,248,0.7)}
 
-        /* General styling from the original style.css, simplified for single file */
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #f1f3f6; /* Flipkart background color */
-        }
-        
-        .arrow_down {
-            border-left: 11px solid transparent;
-            border-right: 11px solid transparent;
-            border-bottom: 11px solid #fff;
-        }
-        
-        /* Dropdown menus (using opacity/visibility for smoothness) */
-        .userDropDownMenu, .moreDropDownMenu {
-            transition: opacity 0.1s ease-out, visibility 0.1s ease-out;
-            opacity: 0;
-            visibility: hidden;
-            z-index: 50;
-        }
-        
-        .userDropDown:hover .userDropDownMenu,
-        .moreDropDown:hover .moreDropDownMenu {
-            opacity: 1;
-            visibility: visible;
-        }
+/* ---------- Layout ---------- */
+.layout{display:grid;grid-template-columns:1fr 360px;gap:18px}
+@media (max-width:980px){.layout{grid-template-columns:1fr}.sidebar{order:2}}
 
-        /* Material Icons sizing */
-        .md-12 { font-size: 12px; }
-        .md-16 { font-size: 16px; }
-        .md-18 { font-size: 18px; }
-        .md-20 { font-size: 20px; }
-        .md-22 { font-size: 22px; }
-        
-        /* Sticky sidebar for price details in cart/checkout */
-        .sticky-top {
-            position: sticky;
-            top: 60px; /* Adjusted for the fixed header height */
-            height: fit-content;
-        }
-    </style>
+/* ---------- Product grid ---------- */
+.products{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+.product{border-radius:12px;overflow:hidden;position:relative}
+.product .thumb{height:160px;background-size:cover;background-position:center}
+.product .meta{padding:12px}
+.product h3{font-size:16px;margin-bottom:6px}
+.price-row{display:flex;align-items:center;justify-content:space-between}
+.price{font-weight:700;font-size:16px}
+.muted{font-size:12px;color:rgba(230,238,248,0.66)}
+
+/* ---------- Buttons ---------- */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;border:0;background:linear-gradient(90deg,#06b6d4,#7c3aed);color:#041027;font-weight:700;cursor:pointer}
+.btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.06);color:#e6eef8}
+
+/* ---------- Sidebar (cart) ---------- */
+.sidebar .card{padding:16px;height:100%}
+.cart-list{margin-top:12px;display:flex;flex-direction:column;gap:10px;max-height:420px;overflow:auto;padding-right:6px}
+.cart-item{display:flex;gap:12px;align-items:center}
+.cart-item img{width:56px;height:48px;object-fit:cover;border-radius:8px}
+.cart-item .info{flex:1}
+.totals{margin-top:12px;border-top:1px dashed rgba(255,255,255,0.04);padding-top:10px}
+
+/* ---------- Modal ---------- */
+.modal-backdrop{position:fixed;inset:0;background:linear-gradient(180deg, rgba(0,0,0,0.5), rgba(0,0,0,0.7));display:flex;align-items:center;justify-content:center;z-index:40}
+.modal{width:platformFillWidth();max-width:720px;background:#02102b;border-radius:12px;padding:18px;border:1px solid rgba(255,255,255,0.04)}
+
+/* ---------- Tiny UI flourishes ---------- */
+.badge{background:rgba(124,58,237,0.12);color:#c7b3ff;padding:6px 8px;border-radius:999px;font-weight:600;font-size:12px}
+.pill{background:rgba(255,255,255,0.02);padding:6px 8px;border-radius:999px;font-size:12px}
+
+/* scrollbar */
+.cart-list::-webkit-scrollbar{width:8px}
+.cart-list::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.06);border-radius:10px}
+
+footer{margin-top:22px;text-align:center;color:rgba(230,238,248,0.55);font-size:13px}
+
+/* small helpers */
+.center{text-align:center}
+.space{height:14px}
+input,select,textarea{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:10px;border-radius:8px;color:inherit;width:100%}
+
+  </style>
 </head>
-<body class="bg-gray-100 min-h-screen">
-
-    <!-- Loading Overlay -->
-    <div id="loading-overlay" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex justify-center items-center z-[100] hidden">
-        <div class="flex flex-col items-center p-8 bg-white rounded-lg shadow-2xl">
-            <svg class="animate-spin -ml-1 mr-3 h-8 w-8 text-primary-blue" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-            </svg>
-            <p class="mt-3 text-sm font-medium text-gray-700">Connecting...</p>
+<body>
+  <div id="app">
+    <div class="container">
+      <header>
+        <div class="brand">
+          <div class="logo">JS</div>
+          <div>
+            <h1>One‑Page Shop</h1>
+            <p class="muted">A fully loaded single-file demo. Add to cart, Buy, Checkout — all working locally.</p>
+          </div>
         </div>
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="badge">Live demo</div>
+          <button id="openCartBtn" class="btn">Cart (<span id="cartCount">0</span>)</button>
+        </div>
+      </header><main class="layout">
+    <section>
+      <div class="card">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px">
+          <div>
+            <h2 style="font-size:18px">Featured Products</h2>
+            <div class="muted">Hand-picked items. Click Buy to simulate a purchase.</div>
+          </div>
+          <div class="pill">Secure · Fast · Local</div>
+        </div>
+
+        <div class="products" id="products"></div>
+
+        <div class="space"></div>
+        <div class="center muted">This is a self-contained HTML + JS demo. Save as <code>one-page-shop.html</code> and open in browser.</div>
+      </div>
+    </section>
+
+    <aside class="sidebar">
+      <div class="card">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div>
+            <h3 style="margin:0">Your Cart</h3>
+            <div class="muted">Items you plan to buy</div>
+          </div>
+          <div class="muted">Local</div>
+        </div>
+
+        <div class="cart-list" id="cartList">
+          <!-- cart items here -->
+        </div>
+
+        <div class="totals">
+          <div style="display:flex;justify-content:space-between"><div class="muted">Subtotal</div><div id="subtotal">₹0</div></div>
+          <div style="display:flex;justify-content:space-between;margin-top:6px"><div class="muted">Fees</div><div id="fees">₹0</div></div>
+          <div style="display:flex;justify-content:space-between;margin-top:8px;font-weight:800;font-size:18px"><div>Total</div><div id="grandTotal">₹0</div></div>
+          <div style="margin-top:10px;display:flex;gap:10px">
+            <button id="checkoutBtn" class="btn" style="flex:1">Checkout</button>
+            <button id="clearBtn" class="btn secondary">Clear</button>
+          </div>
+        </div>
+      </div>
+
+    </aside>
+  </main>
+
+  <footer>Built for demo — cart persisted to <code>localStorage</code>. No network calls.</footer>
+</div>
+
+  </div>  <!-- Modal container -->  <div id="modalRoot"></div>  <script>
+    /***********************
+     * Demo product data
+     ***********************/
+    const PRODUCTS = [
+      { id: 'p1', title: 'Aurora Headphones', price: 2499, desc: 'Wireless, noise-canceling with 30h battery', img: 'data:image/svg+xml;utf8,' + encodeURIComponent(`<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"800\" height=\"600\"><rect width=\"100%\" height=\"100%\" fill=\"%2308132b\"/><text x=\"50%\" y=\"50%\" fill=\"%23ffffff\" font-size=\"36\" text-anchor=\"middle\">Aurora Headphones</text></svg>` )},
+      { id: 'p2', title: 'Nebula Watch', price: 4999, desc: 'Smart watch with health sensors', img: 'data:image/svg+xml;utf8,' + encodeURIComponent(`<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"800\" height=\"600\"><rect width=\"100%\" height=\"100%\" fill=\"%230f172a\"/><text x=\"50%\" y=\"50%\" fill=\"%23ffffff\" font-size=\"36\" text-anchor=\"middle\">Nebula Watch</text></svg>`)},
+      { id: 'p3', title: 'Comet Backpack', price: 1999, desc: 'Water-resistant, 25L capacity', img: 'data:image/svg+xml;utf8,' + encodeURIComponent(`<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"800\" height=\"600\"><rect width=\"100%\" height=\"100%\" fill=\"%23071b3a\"/><text x=\"50%\" y=\"50%\" fill=\"%23ffffff\" font-size=\"36\" text-anchor=\"middle\">Comet Backpack</text></svg>`)},
+      { id: 'p4', title: 'Stellar Lamp', price: 899, desc: 'Mood lamp with 16M colors', img: 'data:image/svg+xml;utf8,' + encodeURIComponent(`<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"800\" height=\"600\"><rect width=\"100%\" height=\"100%\" fill=\"%2302242b\"/><text x=\"50%\" y=\"50%\" fill=\"%23ffffff\" font-size=\"36\" text-anchor=\"middle\">Stellar Lamp</text></svg>`)},
+    ];
+
+    /***********************
+     * App state & helpers
+     ***********************/
+    const storeKey = 'onePageShop_cart_v1';
+    function readCart(){ try{ return JSON.parse(localStorage.getItem(storeKey) || '[]') }catch(e){return []}}
+    function writeCart(c){ localStorage.setItem(storeKey, JSON.stringify(c)) }
+
+    let cart = readCart();
+
+    function money(v){ return '₹' + Number(v).toLocaleString('en-IN') }
+
+    /***********************
+     * Render products
+     ***********************/
+    const productsEl = document.getElementById('products');
+    function renderProducts(){
+      productsEl.innerHTML = PRODUCTS.map(p=>`
+        <div class="product card">
+          <div class="thumb" style="background-image:url('${p.img}')"></div>
+          <div class="meta">
+            <h3>${p.title}</h3>
+            <div class="muted" style="margin-bottom:8px">${p.desc}</div>
+            <div class="price-row">
+              <div class="price">${money(p.price)}</div>
+              <div>
+                <button class="btn buyBtn" data-id="${p.id}">Buy</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      // attach events
+      document.querySelectorAll('.buyBtn').forEach(b=>b.addEventListener('click', e=>{
+        const id = e.currentTarget.dataset.id; addToCart(id, 1); openCheckoutModal();
+      }))
+    }
+
+    /***********************
+     * Cart UI
+     ***********************/
+    const cartCountEl = document.getElementById('cartCount');
+    const cartListEl = document.getElementById('cartList');
+    const subtotalEl = document.getElementById('subtotal');
+    const feesEl = document.getElementById('fees');
+    const grandTotalEl = document.getElementById('grandTotal');
+
+    function updateCartUI(){
+      cartCountEl.textContent = cart.reduce((s,i)=>s+i.qty,0);
+      cartListEl.innerHTML = cart.length ? cart.map(item=>{
+        const p = PRODUCTS.find(x=>x.id===item.id);
+        return `
+          <div class="cart-item">
+            <img src="${p.img}" alt="${p.title}" />
+            <div class="info">
+              <div style="display:flex;justify-content:space-between;align-items:center"><strong>${p.title}</strong><div class="muted">${money(p.price)}</div></div>
+              <div style="display:flex;gap:8px;margin-top:6px;align-items:center">
+                <button class="btn secondary qtyBtn" data-id="${item.id}" data-op="-">-</button>
+                <div class="pill">Qty: ${item.qty}</div>
+                <button class="btn" style="padding:6px 8px" class="qtyBtn" data-id="${item.id}" data-op="+">+</button>
+                <button class="btn secondary" data-id="${item.id}" data-op="remove">Remove</button>
+              </div>
+            </div>
+          </div>
+        `
+      }).join('') : `<div class="muted center">Your cart is empty — click Buy on any product.</div>`;
+
+      // attach cart item events
+      document.querySelectorAll('[data-op]').forEach(btn=>btn.addEventListener('click', e=>{
+        const id = e.currentTarget.dataset.id; const op = e.currentTarget.dataset.op;
+        if(op === '+') changeQty(id, 1);
+        else if(op === '-') changeQty(id, -1);
+        else if(op === 'remove') removeFromCart(id);
+      }))
+
+      const subtotal = cart.reduce((s,i)=> s + (PRODUCTS.find(p=>p.id===i.id).price * i.qty), 0);
+      const fees = Math.round(subtotal * 0.03); // 3% fees example
+      const grand = subtotal + fees;
+      subtotalEl.textContent = money(subtotal);
+      feesEl.textContent = money(fees);
+      grandTotalEl.textContent = money(grand);
+    }
+
+    function addToCart(id, qty=1){
+      const idx = cart.findIndex(i=>i.id===id);
+      if(idx === -1) cart.push({id, qty}); else cart[idx].qty += qty;
+      writeCart(cart); updateCartUI();
+    }
+    function changeQty(id, delta){
+      const idx = cart.findIndex(i=>i.id===id); if(idx === -1) return;
+      cart[idx].qty += delta; if(cart[idx].qty <= 0) cart.splice(idx,1);
+      writeCart(cart); updateCartUI();
+    }
+    function removeFromCart(id){ cart = cart.filter(i=>i.id!==id); writeCart(cart); updateCartUI(); }
+    function clearCart(){ cart = []; writeCart(cart); updateCartUI(); }
+
+    document.getElementById('clearBtn').addEventListener('click', ()=>{ clearCart(); });
+
+    // open cart button
+    document.getElementById('openCartBtn').addEventListener('click', ()=>{
+      // scroll to sidebar
+      document.querySelector('.sidebar').scrollIntoView({behavior:'smooth', block:'center'});
+    })
+
+    document.getElementById('checkoutBtn').addEventListener('click', ()=>{
+      if(!cart.length) { alert('Cart is empty — add items first.'); return; }
+      openCheckoutModal();
+    })
+
+    /***********************
+     * Checkout modal
+     ***********************/
+    const modalRoot = document.getElementById('modalRoot');
+
+    function closeModal(){ modalRoot.innerHTML = '' }
+
+    function openCheckoutModal(){
+      const subtotal = cart.reduce((s,i)=> s + (PRODUCTS.find(p=>p.id===i.id).price * i.qty), 0);
+      const fees = Math.round(subtotal * 0.03);
+      const grand = subtotal + fees;
+
+      modalRoot.innerHTML = `
+        <div class="modal-backdrop" id="modalBackdrop">
+          <div class="modal card">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+              <div>
+                <h3>Checkout</h3>
+                <div class="muted">Review your order and confirm payment (demo)</div>
+              </div>
+              <button id="closeModalBtn" class="btn secondary">X</button>
+            </div>
+
+            <div style="display:flex;gap:12px">
+              <div style="flex:1">
+                <div class="muted">Contact</div>
+                <input id="nameInput" placeholder="Full name" />
+                <div style="height:8px"></div>
+                <input id="emailInput" placeholder="Email" />
+                <div style="height:12px"></div>
+                <div class="muted">Shipping address</div>
+                <textarea id="addressInput" rows="3" placeholder="Street, City, PIN"></textarea></div>
+          <div style="width:260px">
+            <div class="muted">Order summary</div>
+            <div style="margin-top:8px;display:flex;flex-direction:column;gap:8px;max-height:300px;overflow:auto">
+              ${cart.map(item=>{
+                const p = PRODUCTS.find(x=>x.id===item.id);
+                return `<div style="display:flex;justify-content:space-between"><div>${p.title} × ${item.qty}</div><div>${money(p.price*item.qty)}</div></div>`
+              }).join('')}
+            </div>
+
+            <div style="border-top:1px dashed rgba(255,255,255,0.04);margin-top:10px;padding-top:10px">
+              <div style="display:flex;justify-content:space-between"><div class="muted">Subtotal</div><div>${money(subtotal)}</div></div>
+              <div style="display:flex;justify-content:space-between"><div class="muted">Fees</div><div>${money(fees)}</div></div>
+              <div style="display:flex;justify-content:space-between;font-weight:800;margin-top:8px"><div>Total</div><div>${money(grand)}</div></div>
+            </div>
+
+            <div style="margin-top:12px;display:flex;gap:8px">
+              <button id="confirmBtn" class="btn" style="flex:1">Confirm Purchase</button>
+              <button id="payLaterBtn" class="btn secondary">Pay later</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
+  `;
 
+  // attach modal events
+  document.getElementById('closeModalBtn').addEventListener('click', closeModal);
+  document.getElementById('modalBackdrop').addEventListener('click', (ev)=>{ if(ev.target.id === 'modalBackdrop') closeModal(); });
 
-    <!-- Status Modal (Replaces alert/confirm) -->
-    <div id="status-modal" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex justify-center items-center z-[100] hidden">
-        <div class="bg-white p-6 rounded-lg shadow-2xl max-w-sm mx-4 transform transition-all">
-            <h3 id="modal-title" class="text-xl font-bold mb-3 text-gray-800"></h3>
-            <p id="modal-message" class="text-sm text-gray-600 mb-6"></p>
-            <div class="flex justify-end space-x-3">
-                <button id="modal-confirm" class="hidden px-4 py-2 bg-primary-orange text-white font-semibold rounded hover:bg-orange-600 transition duration-150 text-sm">Yes, Proceed</button>
-                <button id="modal-close" class="px-4 py-2 bg-primary-blue text-white font-semibold rounded hover:bg-blue-600 transition duration-150 text-sm">Close</button>
+  document.getElementById('confirmBtn').addEventListener('click', ()=>{
+    const name = document.getElementById('nameInput').value.trim();
+    const email = document.getElementById('emailInput').value.trim();
+    const address = document.getElementById('addressInput').value.trim();
+    if(!name || !email) { alert('Please provide name and email to continue.'); return; }
+
+    // simulate processing
+    document.getElementById('confirmBtn').textContent = 'Processing...'; document.getElementById('confirmBtn').disabled = true;
+    setTimeout(()=>{
+      // generate receipt
+      const receipt = generateReceipt({name,email,address,items:cart});
+      const blob = new Blob([receipt], {type: 'text/plain'});
+      const url = URL.createObjectURL(blob);
+
+      modalRoot.innerHTML = `
+        <div class="modal-backdrop">
+          <div class="modal card center">
+            <h3>Payment successful</h3>
+            <p class="muted">Thanks, ${escapeHtml(name)}! Your order is confirmed.</p>
+            <div style="margin-top:8px">Total: <strong>${money(grand)}</strong></div>
+            <div style="margin-top:12px;display:flex;gap:8px;justify-content:center">
+              <a id="downloadReceipt" href="${url}" download="receipt.txt" class="btn">Download receipt</a>
+              <button id="doneBtn" class="btn secondary">Close</button>
             </div>
+          </div>
         </div>
-    </div>
+      `;
 
-    <!-- header starts -->
-    <header class="bg-primary-blue fixed top-0 py-2.5 w-full z-40 shadow-md">
-        <!-- navbar container -->
-        <div class="w-full sm:w-11/12 xl:w-9/12 px-4 mx-auto flex justify-between items-center relative">
-            <!-- logo & search container -->
-            <div class="flex items-center flex-1">
-                <a class="h-7 mr-4" href="javascript:void(0)" onclick="navigateTo('home')">
-                    <img class="h-full w-full object-contain" src="https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/fk-plus_3b0baa.png" alt="Flipkart Logo">
-                </a>
-                <!-- search container -->
-                <div class="w-9/12 px-4 py-1.5 hidden sm:flex justify-between items-center shadow-md bg-white rounded-sm">
-                    <input class="text-sm flex-1 outline-none border-none placeholder-gray-500" type="text" placeholder="Search for products, brands and more">
-                    <span class="material-icons text-primary-blue">search</span>
-                </div>
-            </div>
-            <!-- right navs -->
-            <div class="flex items-center justify-between gap-5 sm:gap-7 relative text-sm">
-                <span class="userDropDown flex items-center text-white font-medium gap-1 cursor-pointer">
-                    <span id="user-display-name">Guest</span>
-                    <span class="material-icons text-sm transition-transform duration-100">expand_more</span>
-                </span>
-                
-                <a href="javascript:void(0)" onclick="navigateTo('cart')" class="flex items-center text-white font-medium gap-2 relative">
-                    <span class="material-icons">shopping_cart</span>
-                    <!-- badge count -->
-                    <div id="cart-count-badge" class="w-5 h-5 p-2 bg-red-500 text-xs rounded-full absolute -top-2 left-3 flex justify-center items-center border border-white text-white">
-                        0
-                    </div>
-                    Cart
-                </a>
-                
-                <a href="javascript:void(0)" onclick="navigateTo('orders')" class="hidden sm:flex items-center text-white font-medium gap-2 relative">
-                    <span class="material-icons">shopping_bag</span>
-                    Orders
-                </a>
-            </div>
-        </div>
-    </header>
-    <!-- header ends -->
+      // clear cart
+      clearCart();
 
-    <!-- main content container -->
-    <div id="app-container" class="pt-16 min-h-[calc(100vh-60px)]">
-        <!-- Application views render here -->
-    </div>
-    <!-- main content container -->
+      document.getElementById('doneBtn').addEventListener('click', closeModal);
+    }, 900);
+  });
 
-    <!-- footer starts -->
-    <footer class="w-full py-4 px-4 sm:px-12 bg-primary-darkBlue text-white text-xs border-t border-gray-600">
-        <div class="w-full sm:w-11/12 xl:w-9/12 mx-auto flex flex-col sm:flex-row gap-5">
-            <div class="w-full sm:w-1/2 grid grid-cols-2 sm:grid-cols-4 gap-4">
-                <div class="flex flex-col gap-2"><h2 class="text-primary-grey mb-2">ABOUT</h2><a href="#" class="hover:underline">Contact Us</a></div>
-                <div class="flex flex-col gap-2"><h2 class="text-primary-grey mb-2">HELP</h2><a href="#" class="hover:underline">Payments</a></div>
-                <div class="flex flex-col gap-2"><h2 class="text-primary-grey mb-2">POLICY</h2><a href="#" class="hover:underline">Return Policy</a></div>
-                <div class="flex flex-col gap-2"><h2 class="text-primary-grey mb-2">SOCIAL</h2><a href="#" class="hover:underline">Facebook</a></div>
-            </div>
-            <div class="border-gray-600 h-full w-px border-l mx-6 hidden sm:block"></div>
-            <div class="w-full sm:w-1/2 flex flex-col sm:flex-row gap-4 justify-between">
-                <div class="w-full sm:w-1/2"><h2 class="text-primary-grey">Mail Us:</h2><p class="mt-2 leading-5 text-gray-300">Flipkart Internet Private Limited, ...</p></div>
-                <div class="w-full sm:w-1/2"><h2 class="text-primary-grey">Registered Office Address:</h2><p class="mt-2 leading-5 text-gray-300">Flipkart Internet Private Limited, ...</p></div>
-            </div>
-        </div>
-    </footer>
+  document.getElementById('payLaterBtn').addEventListener('click', ()=>{ alert('Payment postponed — order saved locally.'); closeModal(); });
+}
 
-    <!-- copyright cards footer -->
-    <div class="px-4 sm:px-12 py-3 w-full bg-primary-darkBlue flex justify-between items-center text-xs text-white border-t border-gray-600">
-        <div class="flex gap-4">
-            <a href="#" class="flex items-center gap-2"><span class="material-icons text-yellow-400 md-20">work</span> Sell On Flipkart</a>
-            <a href="#" class="flex items-center gap-2"><span class="material-icons text-yellow-400 md-20">help</span> Help Center</a>
-        </div>
-        <div>&copy; 2024 Flipkart Clone</div>
-    </div>
+function generateReceipt({name,email,address,items}){
+  const lines = [];
+  lines.push('One‑Page Shop — Receipt');
+  lines.push('Date: ' + new Date().toLocaleString());
+  lines.push('Name: ' + name);
+  lines.push('Email: ' + email);
+  if(address) lines.push('Address: ' + address);
+  lines.push('\nItems:');
+  let subtotal = 0;
+  for(const it of items){
+    const p = PRODUCTS.find(x=>x.id===it.id);
+    const line = `${p.title} × ${it.qty} @ ${p.price} = ${p.price*it.qty}`;
+    lines.push(line);
+    subtotal += p.price * it.qty;
+  }
+  const fees = Math.round(subtotal * 0.03);
+  const grand = subtotal + fees;
+  lines.push('\nSubtotal: ' + subtotal);
+  lines.push('Fees (3%): ' + fees);
+  lines.push('Total: ' + grand);
+  lines.push('\nThank you for shopping locally!');
+  return lines.join('\n');
+}
 
-    <!-- Firebase SDKs -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, getDoc, setDoc, runTransaction, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-        import { setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-        
-        setLogLevel('debug');
-        
-        // --- Global Variables and Firebase Initialization ---
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-        const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
-        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+function escapeHtml(s){ return String(s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])) }
 
-        let app;
-        let db;
-        let auth;
-        let userId = null;
-        let isAuthReady = false;
-        let cartData = { items: [], total: 0, count: 0 };
-        let userData = {
-            address: {
-                name: 'Jane Doe',
-                phone: '9876543210',
-                pincode: '110001',
-                locality: 'Example Locality',
-                fullAddress: 'H.No 123, Block A, City Center',
-                city: 'New Delhi',
-                state: 'Delhi'
-            }
-        };
-        let unsubscribeCart = null;
-        
-        const CART_COLLECTION_PATH = `/artifacts/${appId}/users/`;
+// initial render
+renderProducts(); updateCartUI();
 
-        // Mock product data (repeated and expanded for demonstration sections)
-        const MOCK_PRODUCTS = [
-            { id: 'P001', name: 'SAMSUNG 230 L Direct Cool Single Door 3 Star Refrigerator', image: 'https://rukminim1.flixcart.com/image/312/312/kk1h5e80/refrigerator-new/g/y/y/rt28a3021s8-hl-1-2021-samsung-original-imafzhedkazavggn.jpeg', price: 16790, mrp: 18890, discount: '15% off', rating: 4.3, reviews: 7345 },
-            { id: 'P002', name: 'Eureka Forbes Aquasure Desire Water Purifier Aquaguard', image: 'https://rukminim1.flixcart.com/image/312/312/jxp08sw0/water-purifier/r/z/s/eureka-forbes-aquasure-from-aquaguard-desire-ro-mc-original-imafg3hwgn8p7brg.jpeg', price: 9999, mrp: 12000, discount: '17% off', rating: 4.0, reviews: 4500 },
-            { id: 'P003', name: 'boAt Airdopes 131 / 138 Wireless Earbuds', image: 'https://rukminim1.flixcart.com/image/150/150/ksdjma80/headphone/a/u/p/airdopes-131-airdopes-138-boat-original-imag5yz9sfz9bzq8.jpeg', price: 1299, mrp: 2990, discount: '56% off', rating: 4.4, reviews: 120000 },
-            { id: 'P004', name: 'Casual Backpack with Rain Cover - Spacy Unisex', image: 'https://rukminim1.flixcart.com/image/150/150/ki3gknk0-0/backpack/t/n/i/spacy-unisex-backpack-with-rain-cover-and-reflective-strip-p-041-original-imafxyypsycttkeb.jpeg', price: 899, mrp: 1800, discount: '50% off', rating: 4.2, reviews: 8000 },
-            { id: 'P005', name: 'Apple MacBook Air M1', image: 'https://rukminim1.flixcart.com/image/312/312/kfrjkp-laptop/k/m/t/apple-macbook-air-original-imafwgftrkr6j2s8.jpeg', price: 79900, mrp: 92900, discount: '14% off', rating: 4.7, reviews: 55000 },
-            { id: 'P006', name: 'Kissan Tomato Ketchup Pouch 450g', image: 'https://rukminim1.flixcart.com/image/312/312/kh0vonk0/sauce-ketchup/h/b/z/450-tomato-pouch-ketchup-surabhi-original-imafx4qktzguhhwy.jpeg', price: 85, mrp: 100, discount: '15% off', rating: 4.1, reviews: 1200 }
-        ];
+// small helper to satisfy older inlined CSS call (no-op)
+function platformFillWidth(){ return '100%'; }
 
-        const PRODUCT_GROUPS = [
-            { title: "Top Deals for You", tag: "deals", products: MOCK_PRODUCTS },
-            { title: "Electronics & Accessories", tag: "electronics", products: [MOCK_PRODUCTS[2], MOCK_PRODUCTS[4], MOCK_PRODUCTS[3]] },
-            { title: "Home Appliances Steals", tag: "appliances", products: [MOCK_PRODUCTS[0], MOCK_PRODUCTS[1]] },
-            { title: "Everyday Essentials", tag: "essentials", products: [MOCK_PRODUCTS[5], MOCK_PRODUCTS[3]] }
-        ];
-
-        
-        // Expose functions globally
-        window.navigateTo = navigateTo;
-        window.addToCart = addToCart;
-        window.updateCartItemQuantity = updateCartItemQuantity;
-        window.removeFromCart = removeFromCart;
-        window.proceedToCheckout = proceedToCheckout;
-        window.saveAddressAndProceed = saveAddressAndProceed;
-        window.confirmPayment = confirmPayment;
-        
-        document.addEventListener('DOMContentLoaded', initializeApp);
-
-        function showLoading() {
-            document.getElementById('loading-overlay').classList.remove('hidden');
-        }
-
-        function hideLoading() {
-            document.getElementById('loading-overlay').classList.add('hidden');
-        }
-
-        /**
-         * Custom Modal implementation to replace alert/confirm
-         */
-        function showModal(title, message, isConfirm = false) {
-            return new Promise(resolve => {
-                const modal = document.getElementById('status-modal');
-                document.getElementById('modal-title').textContent = title;
-                document.getElementById('modal-message').textContent = message;
-                
-                const closeBtn = document.getElementById('modal-close');
-                const confirmBtn = document.getElementById('modal-confirm');
-
-                closeBtn.onclick = null;
-                confirmBtn.onclick = null;
-
-                if (isConfirm) {
-                    confirmBtn.classList.remove('hidden');
-                    closeBtn.textContent = 'Cancel';
-                    confirmBtn.onclick = () => { modal.classList.add('hidden'); resolve(true); };
-                    closeBtn.onclick = () => { modal.classList.add('hidden'); resolve(false); };
-                } else {
-                    confirmBtn.classList.add('hidden');
-                    closeBtn.textContent = 'Close';
-                    closeBtn.onclick = () => { modal.classList.add('hidden'); resolve(true); };
-                }
-                modal.classList.remove('hidden');
-            });
-        }
-
-
-        // --- Firebase/Auth/Database Setup ---
-
-        async function initializeApp() {
-            showLoading();
-            try {
-                app = initializeApp(firebaseConfig);
-                db = getFirestore(app);
-                auth = getAuth(app);
-                
-                if (initialAuthToken) {
-                    await signInWithCustomToken(auth, initialAuthToken);
-                } else {
-                    await signInAnonymously(auth);
-                }
-
-                onAuthStateChanged(auth, (user) => {
-                    if (user) {
-                        userId = user.uid;
-                        isAuthReady = true;
-                        document.getElementById('user-display-name').textContent = 'User ' + userId.substring(0, 5) + '...';
-                        console.log("Firebase Auth Ready. User ID:", userId);
-                        
-                        listenToCartData();
-                        fetchUserData();
-                        
-                        navigateTo('home');
-                    } else {
-                        userId = null;
-                        isAuthReady = true;
-                        document.getElementById('user-display-name').textContent = 'Guest';
-                        if (unsubscribeCart) { unsubscribeCart(); }
-                        navigateTo('home');
-                    }
-                    hideLoading();
-                });
-
-            } catch (error) {
-                console.error("Firebase initialization failed:", error);
-                hideLoading();
-                showModal("Error", "Failed to initialize the application.");
-            }
-        }
-        
-        function getCartDocRef() {
-            if (!userId) { console.error("User ID is not available."); return null; }
-            return doc(db, CART_COLLECTION_PATH, userId, 'shopping', 'cart');
-        }
-
-        function getUserDocRef() {
-            if (!userId) return null;
-            return doc(db, CART_COLLECTION_PATH, userId, 'profile', 'data');
-        }
-
-        async function fetchUserData() {
-            const docRef = getUserDocRef();
-            if (!docRef) return;
-
-            try {
-                const docSnap = await getDoc(docRef);
-                if (docSnap.exists() && docSnap.data().address) {
-                    userData = docSnap.data();
-                } else {
-                    await setDoc(docRef, userData, { merge: true });
-                }
-            } catch (error) {
-                console.error("Error fetching user data:", error);
-            }
-        }
-        
-        // --- Cart Data Listener ---
-        function listenToCartData() {
-            if (unsubscribeCart) { unsubscribeCart(); }
-
-            const docRef = getCartDocRef();
-            if (!docRef) return;
-
-            unsubscribeCart = onSnapshot(docRef, (docSnap) => {
-                if (docSnap.exists()) {
-                    cartData = docSnap.data();
-                    cartData.items = cartData.items || [];
-                    cartData.count = cartData.items.reduce((sum, item) => sum + item.quantity, 0);
-                    cartData.total = cartData.items.reduce((sum, item) => sum + item.price * item.quantity, 0);
-                } else {
-                    cartData = { items: [], total: 0, count: 0 };
-                    setDoc(docRef, cartData, { merge: true }).catch(e => console.error("Error creating cart doc:", e));
-                }
-                updateUI();
-            }, (error) => {
-                console.error("Error listening to cart data:", error);
-                showModal("Database Error", "Failed to fetch real-time cart data.");
-            });
-        }
-
-        function updateUI() {
-            document.getElementById('cart-count-badge').textContent = cartData.count;
-            
-            const currentPage = document.getElementById('app-container').dataset.page;
-            if (['cart', 'address', 'payment', 'orders'].includes(currentPage)) {
-                 renderPage(currentPage);
-            }
-        }
-
-        // --- Business Logic (Add/Update/Remove/Order) ---
-
-        async function addToCart(productId) {
-            if (!isAuthReady) { showModal("Access Denied", "Please wait for connection before adding items."); return; }
-            showLoading();
-
-            const product = MOCK_PRODUCTS.find(p => p.id === productId);
-            if (!product) { hideLoading(); showModal("Error", "Product not found."); return; }
-
-            const docRef = getCartDocRef();
- 
+  </script>
+</body>
+</html>
