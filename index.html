@@ -1,353 +1,293 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <title>Hotel Gokul Raj - Luxury Hotel Madhubani</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Hotel Gokul Raj, a luxury hotel in Madhubani, Bihar. Curated rooms, fine dining, banquet hall, and event services.">
-  <link rel="stylesheet" href="styles.css">
-  <!-- Font Awesome for icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Gokul Raj | Luxury Hotel in Madhubani</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Custom Styles & Animations -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600;700&display=swap');
+
+        :root {
+            --color-gold: #fbbf24;
+            --color-orange: #ea580c;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Custom Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 200% center; }
+            100% { background-position: -200% center; }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.7s ease-out forwards;
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.7s ease-out forwards;
+        }
+        
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-700 { animation-delay: 0.7s; }
+
+        .animate-shimmer {
+            background-size: 200% auto;
+            animation: shimmer 3s linear infinite;
+        }
+
+        /* Hide scrollbar for modal but allow scrolling */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Selection Color */
+        ::selection {
+            background-color: #f97316;
+            color: white;
+        }
+    </style>
 </head>
-<body>
-  <!-- Navigation -->
-  <nav id="main-nav" class="nav">
-    <div class="container nav-inner">
-      <div class="nav-logo">
-        <div class="nav-logo-icon">
-          <i class="fa-solid fa-star"></i>
-        </div>
-        <div>
-          <h1 class="logo-title">GOKUL RAJ</h1>
-          <span class="logo-subtitle">LUXURY HOTEL</span>
-        </div>
-      </div>
+<body class="bg-gray-50 text-gray-900 antialiased">
 
-      <div class="nav-links">
-        <a href="#home" class="nav-link">Home</a>
-        <a href="#rooms" class="nav-link">Rooms</a>
-        <a href="#dining" class="nav-link">Dining</a>
-        <a href="#gallery" class="nav-link">Gallery</a>
-        <button id="services-btn" class="nav-link nav-button-text" type="button">Services</button>
-        <a href="#contact" class="btn btn-primary nav-cta">Book Now</a>
-      </div>
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-500 bg-transparent py-6">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <!-- Logo -->
+            <div class="flex items-center gap-3">
+                <div class="bg-gradient-to-br from-amber-400 to-orange-600 p-2.5 rounded-xl shadow-lg shadow-orange-500/20">
+                    <i data-lucide="star" class="text-white w-6 h-6 fill-current"></i>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-bold tracking-tight text-white leading-none font-[Inter]">
+                        GOKUL RAJ
+                    </h1>
+                    <span class="text-amber-500 text-[10px] tracking-[0.2em] uppercase font-bold block mt-1 font-[Inter]">
+                        Luxury Hotel
+                    </span>
+                </div>
+            </div>
 
-      <button id="mobile-menu-toggle" class="nav-mobile-toggle" type="button">
-        <i class="fa-solid fa-bars"></i>
-      </button>
-    </div>
+            <!-- Desktop Links -->
+            <div class="hidden md:flex space-x-10 items-center">
+                <a href="#home" class="text-gray-300 hover:text-white text-sm font-medium tracking-wide transition-colors relative group font-[Inter]">
+                    Home
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-orange-500 transition-all group-hover:w-full"></span>
+                </a>
+                <a href="#rooms" class="text-gray-300 hover:text-white text-sm font-medium tracking-wide transition-colors relative group font-[Inter]">
+                    Rooms
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-orange-500 transition-all group-hover:w-full"></span>
+                </a>
+                <a href="#dining" class="text-gray-300 hover:text-white text-sm font-medium tracking-wide transition-colors relative group font-[Inter]">
+                    Dining
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-orange-500 transition-all group-hover:w-full"></span>
+                </a>
+                <a href="#gallery" class="text-gray-300 hover:text-white text-sm font-medium tracking-wide transition-colors relative group font-[Inter]">
+                    Gallery
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-orange-500 transition-all group-hover:w-full"></span>
+                </a>
+                <button onclick="toggleModal(true)" class="text-gray-300 hover:text-white text-sm font-medium tracking-wide transition-colors font-[Inter]">Services</button>
+                <a href="#contact" class="bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-500 hover:to-amber-500 text-white px-7 py-3 rounded-full font-bold text-xs uppercase tracking-widest transition-all shadow-lg hover:shadow-orange-500/40 border border-orange-500/50 font-[Inter]">
+                    Book Now
+                </a>
+            </div>
 
-    <div id="mobile-menu" class="mobile-menu">
-      <a href="#home" class="mobile-link">Home</a>
-      <a href="#rooms" class="mobile-link">Rooms</a>
-      <a href="#dining" class="mobile-link">Dining</a>
-      <button id="services-btn-mobile" class="mobile-link mobile-button" type="button">Services</button>
-      <a href="#contact" class="mobile-link mobile-book">Book Now</a>
-    </div>
-  </nav>
-
-  <!-- HERO -->
-  <section id="home" class="hero">
-    <div class="hero-overlay"></div>
-    <div class="hero-glow hero-glow-left"></div>
-    <div class="hero-glow hero-glow-right"></div>
-
-    <div class="container hero-content">
-      <div class="hero-badge">
-        <i class="fa-solid fa-star"></i>
-        <span>MADHUBANI'S PREMIUM CHOICE</span>
-      </div>
-
-      <h1 class="hero-title">
-        Welcome to <br>
-        <span class="hero-highlight">Gokul Raj</span>
-      </h1>
-
-      <p class="hero-text">
-        Experience the perfect blend of traditional hospitality and modern luxury.
-      </p>
-
-      <div class="hero-actions">
-        <button id="services-btn-hero" class="btn btn-ghost">
-          <i class="fa-solid fa-kitchen-set"></i>
-          <span>Our Services</span>
-        </button>
-
-        <a href="#dining" class="btn btn-ghost">
-          <i class="fa-solid fa-utensils"></i>
-          <span>Restaurant Menu</span>
-        </a>
-
-        <button id="book-hotel-btn" class="btn btn-primary">
-          <i class="fa-solid fa-bed"></i>
-          <span>Book Hotel</span>
-        </button>
-      </div>
-    </div>
-  </section>
-
-  <!-- ROOMS -->
-  <section id="rooms" class="section section-light">
-    <div class="container">
-      <div class="section-header">
-        <div>
-          <span class="section-kicker">ACCOMMODATIONS</span>
-          <h2 class="section-title">Curated Rooms</h2>
-          <div class="section-underline"></div>
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-white" onclick="toggleMobileMenu()">
+                <i data-lucide="menu" id="menu-icon" class="w-7 h-7"></i>
+            </button>
         </div>
 
-        <div class="pill-toggle">
-          <button id="btn-rooms-luxury" class="pill-option pill-active" type="button">Luxury</button>
-          <button id="btn-rooms-family" class="pill-option" type="button">Family</button>
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="hidden md:hidden bg-black/95 backdrop-blur-xl absolute w-full top-full left-0 border-t border-gray-800 shadow-2xl h-screen z-50">
+            <div class="flex flex-col p-8 space-y-6 text-center">
+                <a href="#home" onclick="toggleMobileMenu()" class="text-white hover:text-orange-500 text-xl font-medium">Home</a>
+                <a href="#rooms" onclick="toggleMobileMenu()" class="text-white hover:text-orange-500 text-xl font-medium">Rooms</a>
+                <a href="#dining" onclick="toggleMobileMenu()" class="text-white hover:text-orange-500 text-xl font-medium">Dining</a>
+                <button onclick="toggleModal(true); toggleMobileMenu()" class="text-white hover:text-orange-500 text-xl font-medium w-full">Services</button>
+                <a href="#contact" onclick="toggleMobileMenu()" class="text-orange-500 text-xl font-bold">Book Now</a>
+            </div>
         </div>
-      </div>
+    </nav>
 
-      <div id="rooms-grid" class="cards-grid">
-        <!-- Rooms injected by JS -->
-      </div>
-    </div>
-  </section>
+    <!-- 1. HERO SECTION -->
+    <section id="home" class="relative pt-40 pb-20 flex items-center justify-center overflow-hidden bg-black border-b-8 border-[#FF5733]">
+        <!-- Background Gradients -->
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-gray-800 via-black to-black opacity-80"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-orange-950/20"></div>
+        
+        <!-- Decorative Circles -->
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-orange-500/10 rounded-full blur-[100px] animate-pulse"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-[100px] delay-700 animate-pulse"></div>
 
-  <!-- DINING / MENU -->
-  <section id="dining" class="section section-gray">
-    <div class="container">
-      <div class="section-header section-header-center">
-        <div>
-          <span class="section-kicker">GOKUL RAJ DINING</span>
-          <h2 class="section-title">Our Special Menu</h2>
-          <div class="section-underline center"></div>
-        </div>
-
-        <div class="tabs">
-          <button class="tab-option tab-active" data-menu="veg" type="button">Veg</button>
-          <button class="tab-option" data-menu="nonveg" type="button">Non-Veg</button>
-          <button class="tab-option" data-menu="snacks" type="button">Snacks</button>
-        </div>
-      </div>
-
-      <div id="menu-grid" class="menu-grid">
-        <!-- Menu items injected by JS -->
-      </div>
-
-      <div class="section-center">
-        <a href="#contact" class="menu-link">
-          View Full Menu PDF
-          <i class="fa-regular fa-file-lines"></i>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONCIERGE PANEL -->
-  <section class="section section-light">
-    <div class="container">
-      <div class="concierge">
-        <div class="concierge-bg"></div>
-        <div class="concierge-inner">
-          <div class="concierge-left">
-            <h3 class="concierge-title">
-              How can we <br><span>serve you</span> today?
-            </h3>
-            <p class="concierge-text">
-              Whether you are planning a grand wedding, a corporate seminar, or a relaxing weekend getaway, our concierge team is ready.
+        <div class="relative z-10 container mx-auto px-6 text-center">
+            <div class="inline-flex items-center gap-2 py-1 px-4 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm text-amber-400 text-xs font-bold tracking-widest mb-8 uppercase animate-fade-in-up font-[Inter]">
+                <i data-lucide="star" class="w-3 h-3 fill-current"></i> Madhubani's Premium Choice
+            </div>
+            <h1 class="text-5xl md:text-8xl font-bold text-white mb-6 leading-tight drop-shadow-2xl">
+                Welcome to <br /> 
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-orange-300 to-amber-200 animate-shimmer">
+                    Gokul Raj
+                </span>
+            </h1>
+            <p class="text-gray-400 max-w-xl mx-auto text-lg font-light px-4 mb-10 font-[Inter]">
+                Experience the perfect blend of traditional hospitality and modern luxury.
             </p>
-            <div class="concierge-actions">
-              <button id="btn-book-stay" class="btn btn-primary btn-block" type="button">
-                <i class="fa-solid fa-bed"></i>
-                <span>Book a Stay</span>
-              </button>
-              <button id="btn-explore-services" class="btn btn-ghost btn-block" type="button">
-                <i class="fa-solid fa-kitchen-set"></i>
-                <span>Explore Services</span>
-              </button>
-            </div>
-          </div>
 
-          <div class="concierge-right">
-            <div class="concierge-card">
-              <div class="concierge-icon"><i class="fa-solid fa-shield"></i></div>
-              <h4>Safe &amp; Sanitized</h4>
-              <p>Best-in-class hygiene</p>
+            <!-- Hero Buttons -->
+            <div class="flex flex-col md:flex-row justify-center gap-4 animate-fade-in-up delay-200">
+                <button onclick="toggleModal(true)" class="px-8 py-3 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 text-white rounded-full font-bold transition-all flex items-center justify-center gap-2 font-[Inter]">
+                    <i data-lucide="chef-hat" class="w-5 h-5"></i> Our Services
+                </button>
+                <a href="#dining" class="px-8 py-3 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 text-white rounded-full font-bold transition-all flex items-center justify-center gap-2 font-[Inter]">
+                    <i data-lucide="utensils" class="w-5 h-5"></i> Restaurant Menu
+                </a>
+                <button onclick="document.getElementById('contact-box').scrollIntoView({ behavior: 'smooth' })" class="px-8 py-3 bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-500 hover:to-amber-500 text-white rounded-full font-bold shadow-lg shadow-orange-500/30 transition-all flex items-center justify-center gap-2 font-[Inter]">
+                    <i data-lucide="bed-double" class="w-5 h-5"></i> Book Hotel
+                </button>
             </div>
-            <div class="concierge-card">
-              <div class="concierge-icon"><i class="fa-solid fa-star"></i></div>
-              <h4>Top Rated</h4>
-              <p>Most loved hotel</p>
-            </div>
-            <div class="concierge-card">
-              <div class="concierge-icon"><i class="fa-solid fa-users"></i></div>
-              <h4>Event Experts</h4>
-              <p>Weddings &amp; Seminars</p>
-            </div>
-            <div class="concierge-card">
-              <div class="concierge-icon"><i class="fa-solid fa-phone"></i></div>
-              <h4>24/7 Support</h4>
-              <p>Always here to help</p>
-            </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- CONTACT / TRUST BOX -->
-  <section id="contact" class="section section-gray">
-    <div id="contact-box" class="container">
-      <div class="contact-box">
-        <div class="contact-left">
-          <h4 class="contact-kicker">RESERVATIONS</h4>
-          <div class="contact-phone">
-            <div class="contact-phone-icon">
-              <i class="fa-solid fa-phone"></i>
-            </div>
-            <h2>+91 8797125005</h2>
-          </div>
-          <p class="contact-note">Call us directly for the best rates.</p>
-        </div>
-        <div class="contact-right">
-          <div class="contact-review-icon">
-            <i class="fa-solid fa-circle-check"></i>
-          </div>
-          <div>
-            <h5 class="contact-review-title">Verified Excellence</h5>
-            <p class="contact-review-text">
-              "The hospitality at Gokul Raj is unmatched. Highly recommended for families."
-            </p>
-            <div class="contact-stars">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <span>- Recent Guest</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- GALLERY -->
-  <section id="gallery" class="section section-dark">
-    <div class="container">
-      <div class="section-header">
-        <div>
-          <span class="section-kicker section-kicker-light">OUR GALLERY</span>
-          <h2 class="section-title section-title-light">A Glimpse of Luxury</h2>
-        </div>
-        <div class="gallery-controls">
-          <button id="btn-prev-slide" class="circle-button" type="button">
-            <i class="fa-solid fa-chevron-left"></i>
-          </button>
-          <button id="btn-next-slide" class="circle-button" type="button">
-            <i class="fa-solid fa-chevron-right"></i>
-          </button>
-        </div>
-      </div>
-
-      <div class="gallery-wrapper">
-        <div class="gallery-slide">
-          <img id="gallery-image" src="" alt="Slide image">
-          <div class="gallery-gradient"></div>
-          <div class="gallery-caption">
-            <h3 id="gallery-title"></h3>
-            <p id="gallery-subtitle"></p>
-          </div>
-          <div id="gallery-dots" class="gallery-dots">
-            <!-- dots via JS -->
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SERVICES MODAL -->
-  <div id="services-modal" class="modal-overlay">
-    <div class="modal">
-      <div class="modal-header">
-        <div>
-          <h2>Guest Services</h2>
-          <p>Everything you need</p>
-        </div>
-        <button id="modal-close-btn" class="circle-button circle-button-light" type="button">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="modal-grid">
-          <div>
-            <h3 class="modal-section-title">Tariffs &amp; Rates</h3>
-            <div class="tariff-list">
-              <div class="tariff-item">
-                <h4>Premium Suite</h4>
-                <div class="tariff-row">
-                  <span>Single / Double</span>
-                  <span class="tariff-price">₹4500 / ₹5000</span>
+    <!-- 2. ROOMS SECTION -->
+    <section id="rooms" class="py-20 bg-white relative">
+        <div class="container mx-auto px-6 relative z-10">
+            <!-- Header -->
+            <div class="flex flex-col md:flex-row justify-between items-center md:items-end mb-12 gap-8 text-center md:text-left">
+                <div class="w-full md:w-auto">
+                    <span class="text-orange-600 font-bold uppercase tracking-widest text-sm mb-2 block font-[Inter]">Accommodations</span>
+                    <h2 class="text-4xl md:text-5xl font-bold text-black">Curated Rooms</h2>
+                    <div class="w-24 h-1.5 bg-gradient-to-r from-orange-500 to-amber-500 rounded-full mt-4 mx-auto md:mx-0"></div>
                 </div>
-              </div>
-              <div class="tariff-item">
-                <h4>Deluxe Room</h4>
-                <div class="tariff-row">
-                  <span>Single / Double</span>
-                  <span class="tariff-price">₹3000 / ₹3500</span>
+                
+                <!-- Category Tabs -->
+                <div class="bg-gray-100 p-1.5 rounded-full flex gap-2 shadow-inner mx-auto md:mx-0">
+                    <button onclick="switchRooms('luxury')" id="btn-luxury" class="px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 bg-black text-white shadow-lg font-[Inter]">Luxury</button>
+                    <button onclick="switchRooms('family')" id="btn-family" class="px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 text-gray-500 hover:text-black font-[Inter]">Family</button>
                 </div>
-              </div>
-              <div class="tariff-item">
-                <h4>Standard Room</h4>
-                <div class="tariff-row">
-                  <span>Single / Double</span>
-                  <span class="tariff-price">₹2000 / ₹2500</span>
+            </div>
+
+            <!-- Luxury Rooms Grid -->
+            <div id="rooms-luxury" class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <!-- Room 1 -->
+                <div class="group bg-white rounded-2xl overflow-hidden hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)] transition-all duration-500 border border-gray-100">
+                    <div class="relative h-72 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800&q=80" alt="Premium Suite" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute top-4 left-4 bg-orange-600 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-lg font-[Inter]">Best Seller</div>
+                        <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 to-transparent p-6 pt-20">
+                            <p class="text-white text-xl font-bold font-[Inter]">Rs. 5000 <span class="text-xs font-normal opacity-70">/ night</span></p>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3 group-hover:text-orange-600 transition-colors">Premium Suite</h3>
+                        <p class="text-gray-500 text-sm mb-6 leading-relaxed line-clamp-2 font-[Inter]">King size bed, city view, 80 sqft spacious area.</p>
+                        <div class="flex items-center justify-between pt-6 border-t border-gray-100">
+                            <div class="flex gap-4 text-gray-400">
+                                <i data-lucide="wifi" class="w-5 h-5 hover:text-orange-500 transition-colors"></i>
+                                <i data-lucide="coffee" class="w-5 h-5 hover:text-orange-500 transition-colors"></i>
+                                <i data-lucide="bed-double" class="w-5 h-5 hover:text-orange-500 transition-colors"></i>
+                            </div>
+                            <button onclick="document.getElementById('contact-box').scrollIntoView({ behavior: 'smooth' })" class="flex items-center gap-2 text-sm font-bold text-black group-hover:text-orange-600 transition-colors font-[Inter]">
+                                Book Now <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
-              </div>
+                <!-- Room 2 -->
+                <div class="group bg-white rounded-2xl overflow-hidden hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)] transition-all duration-500 border border-gray-100">
+                    <div class="relative h-72 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=80" alt="Deluxe Executive" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute top-4 left-4 bg-orange-600 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-lg font-[Inter]">Top Value</div>
+                        <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 to-transparent p-6 pt-20">
+                            <p class="text-white text-xl font-bold font-[Inter]">Rs. 3500 <span class="text-xs font-normal opacity-70">/ night</span></p>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3 group-hover:text-orange-600 transition-colors">Deluxe Executive</h3>
+                        <p class="text-gray-500 text-sm mb-6 leading-relaxed line-clamp-2 font-[Inter]">Modern amenities for business travelers.</p>
+                        <div class="flex items-center justify-between pt-6 border-t border-gray-100">
+                            <div class="flex gap-4 text-gray-400">
+                                <i data-lucide="wifi" class="w-5 h-5 hover:text-orange-500 transition-colors"></i>
+                                <i data-lucide="coffee" class="w-5 h-5 hover:text-orange-500 transition-colors"></i>
+                                <i data-lucide="bed-double" class="w-5 h-5 hover:text-orange-500 transition-colors"></i>
+                            </div>
+                            <button onclick="document.getElementById('contact-box').scrollIntoView({ behavior: 'smooth' })" class="flex items-center gap-2 text-sm font-bold text-black group-hover:text-orange-600 transition-colors font-[Inter]">
+                                Book Now <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Room 3 -->
+                <div class="group bg-white rounded-2xl overflow-hidden hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)] transition-all duration-500 border border-gray-100">
+                    <div class="relative h-72 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=800&q=80" alt="Standard Luxury" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 to-transparent p-6 pt-20">
+                            <p class="text-white text-xl font-bold font-[Inter]">Rs. 2500 <span class="text-xs font-normal opacity-70">/ night</span></p>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3 group-hover:text-orange-600 transition-colors">Standard Luxury</h3>
+                        <p class="text-gray-500 text-sm mb-6 leading-relaxed line-clamp-2 font-[Inter]">Comfortable stay with all basic luxury needs.</p>
+                        <div class="flex items-center justify-between pt-6 border-t border-gray-100">
+                            <div class="flex gap-4 text-gray-400">
+                                <i data-lucide="wifi" class="w-5 h-5 hover:text-orange-500 transition-colors"></i>
+                                <i data-lucide="coffee" class="w-5 h-5 hover:text-orange-500 transition-colors"></i>
+                                <i data-lucide="bed-double" class="w-5 h-5 hover:text-orange-500 transition-colors"></i>
+                            </div>
+                            <button onclick="document.getElementById('contact-box').scrollIntoView({ behavior: 'smooth' })" class="flex items-center gap-2 text-sm font-bold text-black group-hover:text-orange-600 transition-colors font-[Inter]">
+                                Book Now <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
 
-          <div class="modal-right">
-            <div class="modal-section">
-              <h3 class="modal-section-title">Exclusive Amenities</h3>
-              <ul class="amenities-list">
-                <li><i class="fa-solid fa-circle-check"></i> Banquet Hall</li>
-                <li><i class="fa-solid fa-circle-check"></i> Seminar Room</li>
-                <li><i class="fa-solid fa-circle-check"></i> Fine Dining</li>
-                <li><i class="fa-solid fa-circle-check"></i> Free High-Speed Wifi</li>
-                <li><i class="fa-solid fa-circle-check"></i> Secure Parking</li>
-              </ul>
-            </div>
-            <div class="modal-quote">
-              “Best luxury hotel in Bihar, Madhubani city since 2000.”
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="container footer-inner">
-      <div class="footer-col">
-        <h2 class="footer-logo">GOKUL RAJ</h2>
-        <p>Elevating the standard of hospitality in Madhubani.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Links</h4>
-        <ul>
-          <li><a href="#home">Home</a></li>
-          <li><a href="#rooms">Rooms</a></li>
-          <li><a href="#gallery">Gallery</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Location</h4>
-        <p>Rajnagar Road, Leheriyaganj</p>
-        <p>Madhubani, Bihar - 847211</p>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      &copy; 2025 Hotel Gokul Raj. Excellence in Hospitality.
-    </div>
-  </footer>
-
-  <script src="script.js"></script>
-</body>
-</html>
+            <!-- Family Rooms Grid (Hidden by default) -->
+            <div id="rooms-family" class="hidden grid md:grid-cols-2 lg:grid-cols-3 gap-10 animate-fade-in">
+                 <!-- Room 1 -->
+                 <div class="group bg-white rounded-2xl overflow-hidden hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)] transition-all duration-500 border border-gray-100">
+                    <div class="relative h-72 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1596436889106-be35e843f974?w=800&q=80" alt="Grand Family Suite" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute top-4 left-4 bg-orange-600 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-lg font-[Inter]">Families Love This</div>
+                        <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 to-transparent p-6 pt-20">
+                            <p class="text-white text-xl font-bold font-[Inter]">Rs. 6000 <span class="text-xs font-normal opacity-70">/ night</span></p>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3 group-hover:text-orange-600 transition-colors">Grand Family Suite</h3>
+                        <p class="text-gray-500 text-sm mb-6 leading-relaxed line-clamp-2 font-[Inter]">Two connecting rooms with large living space.</p>
+                        <div class="flex items-center justify-between pt-6 border-t border-gray-100">
+                             <div class="flex gap-4 text-gray-400">
+                                <i data-lucide="wifi" class="w-5 h-5 hover:text-orange-500 transition-colors"></i>
+                                <i data-lucide="coffee" class="w-5 h-5 hover:text-orange-500 transition-colors"></i>
+                                <i data-lucide="bed-double" class="w-5 h-5 hover:text-orange-500 transition-colors"></i>
+                            </div>
+                            <button onclick="document.getElementById('contact-box').scrollIntoView({ behavior: 'smooth' })" class="flex items-center gap-2 text-sm font-bold 
