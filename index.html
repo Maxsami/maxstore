@@ -22,16 +22,20 @@
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes shimmer { 0% { background-position: 200% center; } 100% { background-position: -200% center; } }
 
-        .animate-fade-in { animation: fadeIn 0.7s ease-out forwards; }
+        .animate-fade-in { animation: fadeIn 0.5s ease-out forwards; }
         .animate-fade-in-up { animation: fadeInUp 0.7s ease-out forwards; }
         .animate-shimmer { background-size: 200% auto; animation: shimmer 3s linear infinite; }
 
-        /* Hide scrollbar for modal */
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-        /* Smooth transitions for buttons */
+        /* Button Transition */
         button { transition: all 0.3s ease; }
+        
+        /* Image Hover Zoom */
+        .img-zoom-container { overflow: hidden; }
+        .img-zoom-container img { transition: transform 0.5s ease; }
+        .group:hover .img-zoom-container img { transform: scale(1.1); }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-900 antialiased">
@@ -49,7 +53,6 @@
                 </div>
             </div>
 
-            <!-- Desktop Menu -->
             <div class="hidden md:flex space-x-10 items-center">
                 <a href="#home" class="text-gray-300 hover:text-white text-sm font-medium tracking-wide transition-colors">Home</a>
                 <a href="#rooms" class="text-gray-300 hover:text-white text-sm font-medium tracking-wide transition-colors">Rooms</a>
@@ -59,13 +62,11 @@
                 <a href="#contact" class="bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-500 hover:to-amber-500 text-white px-7 py-3 rounded-full font-bold text-xs uppercase tracking-widest shadow-lg">Book Now</a>
             </div>
 
-            <!-- Mobile Menu Toggle -->
             <button class="md:hidden text-white cursor-pointer" onclick="toggleMobileMenu()">
                 <i data-lucide="menu" class="w-7 h-7"></i>
             </button>
         </div>
 
-        <!-- Mobile Menu Overlay -->
         <div id="mobile-menu" class="hidden md:hidden bg-black/95 backdrop-blur-xl absolute w-full top-full left-0 border-t border-gray-800 shadow-2xl h-screen z-50">
             <div class="flex flex-col p-8 space-y-6 text-center">
                 <a href="#home" onclick="toggleMobileMenu()" class="text-white hover:text-orange-500 text-xl font-medium">Home</a>
@@ -98,7 +99,7 @@
                 <a href="#dining" class="px-8 py-3 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 text-white rounded-full font-bold flex items-center justify-center gap-2 cursor-pointer">
                     <i data-lucide="utensils" class="w-5 h-5"></i> Restaurant Menu
                 </a>
-                <button onclick="scrollToContact()" class="px-8 py-3 bg-gradient-to-r from-orange-600 to-amber-600 text-white rounded-full font-bold shadow-lg flex items-center justify-center gap-2 cursor-pointer">
+                <button onclick="scrollToContact()" class="px-8 py-3 bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-500 hover:to-amber-500 text-white rounded-full font-bold shadow-lg flex items-center justify-center gap-2 cursor-pointer">
                     <i data-lucide="bed-double" class="w-5 h-5"></i> Book Hotel
                 </button>
             </div>
@@ -122,104 +123,14 @@
                 </div>
             </div>
 
-            <!-- Luxury Rooms (Default Visible) -->
-            <div id="rooms-luxury" class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-                <!-- Card 1 -->
-                <div class="group bg-white rounded-2xl overflow-hidden hover:shadow-xl transition-all border border-gray-100">
-                    <div class="relative h-72 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800&q=80" class="w-full h-full object-cover group-hover:scale-110 transition-transform">
-                        <div class="absolute top-4 left-4 bg-orange-600 text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-lg">Best Seller</div>
-                        <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 to-transparent p-6 pt-20">
-                            <p class="text-white text-xl font-bold">Rs. 5000 <span class="text-xs font-normal opacity-70">/ night</span></p>
-                        </div>
-                    </div>
-                    <div class="p-8">
-                        <h3 class="text-2xl font-bold mb-3 font-serif">Premium Suite</h3>
-                        <p class="text-gray-500 text-sm mb-6">King size bed, city view, 80 sqft spacious area.</p>
-                        <button onclick="scrollToContact()" class="flex items-center gap-2 text-sm font-bold text-black group-hover:text-orange-600 transition-colors cursor-pointer">Book Now <i data-lucide="arrow-right" class="w-4 h-4"></i></button>
-                    </div>
-                </div>
-                <!-- Card 2 -->
-                <div class="group bg-white rounded-2xl overflow-hidden hover:shadow-xl transition-all border border-gray-100">
-                    <div class="relative h-72 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=80" class="w-full h-full object-cover group-hover:scale-110 transition-transform">
-                        <div class="absolute top-4 left-4 bg-orange-600 text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-lg">Top Value</div>
-                        <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 to-transparent p-6 pt-20">
-                            <p class="text-white text-xl font-bold">Rs. 3500 <span class="text-xs font-normal opacity-70">/ night</span></p>
-                        </div>
-                    </div>
-                    <div class="p-8">
-                        <h3 class="text-2xl font-bold mb-3 font-serif">Deluxe Executive</h3>
-                        <p class="text-gray-500 text-sm mb-6">Modern amenities for business travelers.</p>
-                        <button onclick="scrollToContact()" class="flex items-center gap-2 text-sm font-bold text-black group-hover:text-orange-600 transition-colors cursor-pointer">Book Now <i data-lucide="arrow-right" class="w-4 h-4"></i></button>
-                    </div>
-                </div>
-                <!-- Card 3 -->
-                <div class="group bg-white rounded-2xl overflow-hidden hover:shadow-xl transition-all border border-gray-100">
-                    <div class="relative h-72 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=800&q=80" class="w-full h-full object-cover group-hover:scale-110 transition-transform">
-                        <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 to-transparent p-6 pt-20">
-                            <p class="text-white text-xl font-bold">Rs. 2500 <span class="text-xs font-normal opacity-70">/ night</span></p>
-                        </div>
-                    </div>
-                    <div class="p-8">
-                        <h3 class="text-2xl font-bold mb-3 font-serif">Standard Luxury</h3>
-                        <p class="text-gray-500 text-sm mb-6">Comfortable stay with all basic luxury needs.</p>
-                        <button onclick="scrollToContact()" class="flex items-center gap-2 text-sm font-bold text-black group-hover:text-orange-600 transition-colors cursor-pointer">Book Now <i data-lucide="arrow-right" class="w-4 h-4"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Family Rooms (Hidden by default) -->
-            <div id="rooms-family" class="hidden grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-                <!-- Card 4 -->
-                <div class="group bg-white rounded-2xl overflow-hidden hover:shadow-xl transition-all border border-gray-100">
-                    <div class="relative h-72 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1596436889106-be35e843f974?w=800&q=80" class="w-full h-full object-cover group-hover:scale-110 transition-transform">
-                        <div class="absolute top-4 left-4 bg-orange-600 text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-lg">Families Love This</div>
-                        <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 to-transparent p-6 pt-20">
-                            <p class="text-white text-xl font-bold">Rs. 6000 <span class="text-xs font-normal opacity-70">/ night</span></p>
-                        </div>
-                    </div>
-                    <div class="p-8">
-                        <h3 class="text-2xl font-bold mb-3 font-serif">Grand Family Suite</h3>
-                        <p class="text-gray-500 text-sm mb-6">Two connecting rooms with large living space.</p>
-                        <button onclick="scrollToContact()" class="flex items-center gap-2 text-sm font-bold text-black group-hover:text-orange-600 transition-colors cursor-pointer">Book Now <i data-lucide="arrow-right" class="w-4 h-4"></i></button>
-                    </div>
-                </div>
-                <!-- Card 5 -->
-                <div class="group bg-white rounded-2xl overflow-hidden hover:shadow-xl transition-all border border-gray-100">
-                    <div class="relative h-72 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1560185127-6ed189bf02f4?w=800&q=80" class="w-full h-full object-cover group-hover:scale-110 transition-transform">
-                        <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 to-transparent p-6 pt-20">
-                            <p class="text-white text-xl font-bold">Rs. 5500 <span class="text-xs font-normal opacity-70">/ night</span></p>
-                        </div>
-                    </div>
-                    <div class="p-8">
-                        <h3 class="text-2xl font-bold mb-3 font-serif">Quadruple Comfort</h3>
-                        <p class="text-gray-500 text-sm mb-6">4 beds, ideal for large families.</p>
-                        <button onclick="scrollToContact()" class="flex items-center gap-2 text-sm font-bold text-black group-hover:text-orange-600 transition-colors cursor-pointer">Book Now <i data-lucide="arrow-right" class="w-4 h-4"></i></button>
-                    </div>
-                </div>
-                <!-- Card 6 -->
-                <div class="group bg-white rounded-2xl overflow-hidden hover:shadow-xl transition-all border border-gray-100">
-                    <div class="relative h-72 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=800&q=80" class="w-full h-full object-cover group-hover:scale-110 transition-transform">
-                        <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 to-transparent p-6 pt-20">
-                            <p class="text-white text-xl font-bold">Rs. 4500 <span class="text-xs font-normal opacity-70">/ night</span></p>
-                        </div>
-                    </div>
-                    <div class="p-8">
-                        <h3 class="text-2xl font-bold mb-3 font-serif">Triple Deluxe</h3>
-                        <p class="text-gray-500 text-sm mb-6">One double and one single bed configuration.</p>
-                        <button onclick="scrollToContact()" class="flex items-center gap-2 text-sm font-bold text-black group-hover:text-orange-600 transition-colors cursor-pointer">Book Now <i data-lucide="arrow-right" class="w-4 h-4"></i></button>
-                    </div>
-                </div>
+            <!-- Dynamic Room Grid -->
+            <div id="rooms-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <!-- Javascript will inject 10 rooms here -->
             </div>
         </div>
     </section>
 
-    <!-- 3. MENU SECTION (Corrected Logic) -->
+    <!-- 3. MENU SECTION -->
     <section id="dining" class="py-20 bg-gray-50">
         <div class="container mx-auto px-6">
             <div class="text-center mb-12">
@@ -229,18 +140,18 @@
                 
                 <!-- Menu Tabs -->
                 <div class="flex flex-wrap justify-center gap-4">
-                    <button id="btn-veg" onclick="switchMenu('veg')" class="px-8 py-3 rounded-full font-bold transition-all capitalize bg-orange-600 text-white shadow-lg cursor-pointer">veg</button>
+                    <button id="btn-veg" onclick="switchMenu('veg')" class="px-8 py-3 rounded-full font-bold transition-all capitalize bg-orange-600 text-white shadow-lg cursor-pointer border border-orange-600">veg</button>
                     <button id="btn-nonveg" onclick="switchMenu('nonveg')" class="px-8 py-3 rounded-full font-bold transition-all capitalize bg-white text-gray-600 hover:bg-gray-200 border border-gray-200 cursor-pointer">Non-Veg</button>
                     <button id="btn-snacks" onclick="switchMenu('snacks')" class="px-8 py-3 rounded-full font-bold transition-all capitalize bg-white text-gray-600 hover:bg-gray-200 border border-gray-200 cursor-pointer">snacks</button>
                 </div>
             </div>
 
             <!-- Dynamic Menu Container -->
-            <div id="menu-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-                <!-- Items injected via JS -->
+            <div id="menu-container" class="grid md:grid-cols-2 lg:grid-cols-2 gap-6 max-w-6xl mx-auto">
+                <!-- Javascript will inject 10 menu items here -->
             </div>
             
-            <div class="text-center mt-10">
+            <div class="text-center mt-12">
                 <a href="#contact" class="inline-flex items-center gap-2 text-orange-600 font-bold hover:underline">
                     View Full Menu PDF <i data-lucide="file-text" class="w-4 h-4"></i>
                 </a>
@@ -248,7 +159,58 @@
         </div>
     </section>
 
-    <!-- 4. CONCIERGE PANEL -->
+    <!-- 4. GALLERY SLIDER (Relocated Here) -->
+    <section id="gallery" class="py-24 bg-black relative">
+        <div class="container mx-auto px-6">
+            <div class="flex items-end justify-between mb-12">
+                <div>
+                    <span class="text-orange-500 font-bold uppercase tracking-widest text-sm mb-2 block">Our Gallery</span>
+                    <h2 class="text-4xl font-bold text-white font-serif">A Glimpse of Luxury</h2>
+                </div>
+                <div class="hidden md:flex gap-2">
+                    <button onclick="prevSlide()" class="p-3 rounded-full border border-gray-700 text-white hover:bg-orange-600 transition-all cursor-pointer"><i data-lucide="chevron-left" class="w-6 h-6"></i></button>
+                    <button onclick="nextSlide()" class="p-3 rounded-full border border-gray-700 text-white hover:bg-orange-600 transition-all cursor-pointer"><i data-lucide="chevron-right" class="w-6 h-6"></i></button>
+                </div>
+            </div>
+            
+            <div class="relative w-full h-[500px] rounded-3xl overflow-hidden shadow-2xl group border border-gray-800">
+                <div id="gallery-image-container" class="w-full h-full relative">
+                    <!-- Images handled by JS -->
+                    <div class="gallery-slide absolute inset-0 transition-opacity duration-1000 ease-out opacity-100">
+                        <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 p-10 w-full md:w-2/3">
+                            <h3 class="text-4xl font-bold mb-3 text-white font-serif">Grand Banquet Hall</h3>
+                            <p class="text-gray-300 text-lg border-l-4 border-orange-500 pl-4">Where memories are made</p>
+                        </div>
+                    </div>
+                    <div class="gallery-slide absolute inset-0 transition-opacity duration-1000 ease-out opacity-0">
+                        <img src="https://images.unsplash.com/photo-1550966871-3ed3c47e2ce2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 p-10 w-full md:w-2/3">
+                            <h3 class="text-4xl font-bold mb-3 text-white font-serif">Gokul Raj Dining</h3>
+                            <p class="text-gray-300 text-lg border-l-4 border-orange-500 pl-4">A taste of elegance</p>
+                        </div>
+                    </div>
+                    <div class="gallery-slide absolute inset-0 transition-opacity duration-1000 ease-out opacity-0">
+                        <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 p-10 w-full md:w-2/3">
+                            <h3 class="text-4xl font-bold mb-3 text-white font-serif">Royal Comfort</h3>
+                            <p class="text-gray-300 text-lg border-l-4 border-orange-500 pl-4">Rest like a king</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="absolute bottom-10 right-10 flex gap-2" id="gallery-dots">
+                    <div class="h-1.5 rounded-full transition-all duration-300 bg-orange-500 w-12 cursor-pointer" onclick="goToSlide(0)"></div>
+                    <div class="h-1.5 rounded-full transition-all duration-300 bg-white/30 w-4 cursor-pointer" onclick="goToSlide(1)"></div>
+                    <div class="h-1.5 rounded-full transition-all duration-300 bg-white/30 w-4 cursor-pointer" onclick="goToSlide(2)"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. CONCIERGE PANEL -->
     <section class="bg-white py-16 relative overflow-hidden">
         <div class="container mx-auto px-6 relative z-10">
             <div class="bg-black text-white rounded-[2.5rem] p-8 md:p-10 shadow-2xl relative overflow-hidden border border-gray-800">
@@ -288,7 +250,7 @@
         </div>
     </section>
 
-    <!-- 5. CONTACT BOX -->
+    <!-- 6. CONTACT BOX -->
     <section id="contact-box" class="py-20 bg-gray-50">
         <div class="container mx-auto px-6">
             <div class="max-w-4xl mx-auto bg-white rounded-3xl shadow-[0_10px_60px_-15px_rgba(0,0,0,0.1)] border border-gray-100 overflow-hidden">
@@ -309,49 +271,6 @@
                                 <h5 class="font-bold text-gray-900">Verified Excellence</h5>
                                 <p class="text-sm text-gray-500">"The hospitality at Gokul Raj is unmatched. Highly recommended for families."</p>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 6. GALLERY SLIDER -->
-    <section id="gallery" class="py-24 bg-black relative">
-        <div class="container mx-auto px-6">
-            <div class="flex items-end justify-between mb-12">
-                <div>
-                    <span class="text-orange-500 font-bold uppercase tracking-widest text-sm mb-2 block">Our Gallery</span>
-                    <h2 class="text-4xl font-bold text-white font-serif">A Glimpse of Luxury</h2>
-                </div>
-                <div class="hidden md:flex gap-2">
-                    <button onclick="prevSlide()" class="p-3 rounded-full border border-gray-700 text-white hover:bg-orange-600 transition-all cursor-pointer"><i data-lucide="chevron-left" class="w-6 h-6"></i></button>
-                    <button onclick="nextSlide()" class="p-3 rounded-full border border-gray-700 text-white hover:bg-orange-600 transition-all cursor-pointer"><i data-lucide="chevron-right" class="w-6 h-6"></i></button>
-                </div>
-            </div>
-            
-            <div class="relative w-full h-[500px] rounded-3xl overflow-hidden shadow-2xl group border border-gray-800">
-                <div id="gallery-image-container" class="w-full h-full relative">
-                    <!-- Images -->
-                    <div class="gallery-slide absolute inset-0 transition-opacity duration-1000 ease-out opacity-100">
-                        <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
-                        <div class="absolute bottom-0 left-0 p-10 w-full md:w-2/3">
-                            <h3 class="text-4xl font-bold mb-3 text-white font-serif">Grand Banquet Hall</h3>
-                        </div>
-                    </div>
-                    <div class="gallery-slide absolute inset-0 transition-opacity duration-1000 ease-out opacity-0">
-                        <img src="https://images.unsplash.com/photo-1550966871-3ed3c47e2ce2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
-                        <div class="absolute bottom-0 left-0 p-10 w-full md:w-2/3">
-                            <h3 class="text-4xl font-bold mb-3 text-white font-serif">Gokul Raj Dining</h3>
-                        </div>
-                    </div>
-                    <div class="gallery-slide absolute inset-0 transition-opacity duration-1000 ease-out opacity-0">
-                        <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
-                        <div class="absolute bottom-0 left-0 p-10 w-full md:w-2/3">
-                            <h3 class="text-4xl font-bold mb-3 text-white font-serif">Royal Comfort</h3>
                         </div>
                     </div>
                 </div>
@@ -400,72 +319,152 @@
 
     <!-- JAVASCRIPT -->
     <script>
-        // Initialize
+        // --- 1. DATASETS (Expanded to 10 items each) ---
+        
+        const roomsData = {
+            luxury: [
+                { name: "Premium Suite", price: "Rs. 5000", desc: "King size bed, city view, 80 sqft spacious area.", image: "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800&q=80", badge: "Best Seller" },
+                { name: "Deluxe Executive", price: "Rs. 3500", desc: "Modern amenities for business travelers.", image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=80", badge: "Top Value" },
+                { name: "Standard Luxury", price: "Rs. 2500", desc: "Comfortable stay with all basic luxury needs.", image: "https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=800&q=80" },
+                { name: "Royal Suite", price: "Rs. 6500", desc: "Ultimate luxury with separate living area.", image: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80" },
+                { name: "Presidential Suite", price: "Rs. 9000", desc: "The finest room with panoramic views.", image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80", badge: "Premium" },
+                { name: "Garden View Room", price: "Rs. 4000", desc: "Peaceful room facing the hotel gardens.", image: "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=800&q=80" },
+                { name: "Poolside Villa", price: "Rs. 7000", desc: "Direct access to the pool.", image: "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=800&q=80" },
+                { name: "Heritage Room", price: "Rs. 4500", desc: "Traditional decor with modern amenities.", image: "https://images.unsplash.com/photo-1595576508898-0ad5c879a061?w=800&q=80" },
+                { name: "Honeymoon Suite", price: "Rs. 5500", desc: "Romantic setting with special amenities.", image: "https://images.unsplash.com/photo-1590073242678-cfea53382e52?w=800&q=80" },
+                { name: "Business Class Room", price: "Rs. 3800", desc: "Ergonomic workspace and high-speed wifi.", image: "https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=800&q=80" }
+            ],
+            family: [
+                { name: "Grand Family Suite", price: "Rs. 6000", desc: "Two connecting rooms with large living space.", image: "https://images.unsplash.com/photo-1596436889106-be35e843f974?w=800&q=80", badge: "Families Love This" },
+                { name: "Quadruple Comfort", price: "Rs. 5500", desc: "4 beds, ideal for large families.", image: "https://images.unsplash.com/photo-1560185127-6ed189bf02f4?w=800&q=80" },
+                { name: "Triple Deluxe", price: "Rs. 4500", desc: "One double and one single bed configuration.", image: "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=800&q=80" },
+                { name: "Connecting Rooms", price: "Rs. 7000", desc: "Two rooms connected internally.", image: "https://images.unsplash.com/photo-1512918760534-d7f646b5b5c1?w=800&q=80" },
+                { name: "Family Studio", price: "Rs. 6500", desc: "Open plan studio with kitchenette.", image: "https://images.unsplash.com/photo-1522771753035-488823ed5dbe?w=800&q=80" },
+                { name: "2BHK Apartment", price: "Rs. 9500", desc: "Feels like a home away from home.", image: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&q=80" },
+                { name: "Bunk Bed Room", price: "Rs. 4000", desc: "Fun room for kids with bunk beds.", image: "https://images.unsplash.com/photo-1505693314120-0d443867891c?w=800&q=80" },
+                { name: "Large Group Dorm", price: "Rs. 8000", desc: "Comfortable dormitory for large groups.", image: "https://images.unsplash.com/photo-1555854743-e3c2f6a58a64?w=800&q=80" },
+                { name: "Kids Themed Room", price: "Rs. 5000", desc: "Decorated specifically for children.", image: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&q=80" },
+                { name: "Senior Friendly Room", price: "Rs. 4200", desc: "Accessible room on the ground floor.", image: "https://images.unsplash.com/photo-1591088398332-8a7791972843?w=800&q=80" }
+            ]
+        };
+
+        const menuData = {
+            veg: [
+                { name: "Paneer Butter Masala", price: "Rs. 280", desc: "Cottage cheese in rich tomato gravy", image: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=200&q=80" },
+                { name: "Dal Makhani", price: "Rs. 220", desc: "Black lentils cooked overnight", image: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=200&q=80" },
+                { name: "Veg Biryani", price: "Rs. 250", desc: "Aromatic rice with veggies", image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=200&q=80" },
+                { name: "Malai Kofta", price: "Rs. 290", desc: "Potato dumplings in white gravy", image: "https://images.unsplash.com/photo-1585937421612-70a008356f36?w=200&q=80" },
+                { name: "Mushroom Do Pyaza", price: "Rs. 270", desc: "Mushrooms with onions", image: "https://images.unsplash.com/photo-1606659779367-124976a47926?w=200&q=80" },
+                { name: "Palak Paneer", price: "Rs. 260", desc: "Cottage cheese in spinach gravy", image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=200&q=80" },
+                { name: "Aloo Gobi", price: "Rs. 200", desc: "Potatoes and cauliflower", image: "https://images.unsplash.com/photo-1603079973699-19777174db27?w=200&q=80" },
+                { name: "Chana Masala", price: "Rs. 210", desc: "Spicy chickpea curry", image: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=200&q=80" },
+                { name: "Veg Korma", price: "Rs. 240", desc: "Mixed veggies in creamy sauce", image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=200&q=80" },
+                { name: "Bhindi Masala", price: "Rs. 190", desc: "Spicy okra fry", image: "https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?w=200&q=80" }
+            ],
+            nonveg: [
+                { name: "Butter Chicken", price: "Rs. 380", desc: "Tandoori chicken in tomato sauce", image: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=200&q=80" },
+                { name: "Chicken Curry", price: "Rs. 320", desc: "Spicy homestyle chicken", image: "https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?w=200&q=80" },
+                { name: "Mutton Rogan Josh", price: "Rs. 450", desc: "Tender mutton Kashmiri style", image: "https://images.unsplash.com/photo-1585937421612-70a008356f36?w=200&q=80" },
+                { name: "Fish Curry", price: "Rs. 350", desc: "River fish in mustard gravy", image: "https://images.unsplash.com/photo-1626509683558-69a68bc066dc?w=200&q=80" },
+                { name: "Chicken Biryani", price: "Rs. 340", desc: "Layered rice with chicken", image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=200&q=80" },
+                { name: "Chicken Tikka Masala", price: "Rs. 360", desc: "Grilled chicken in spicy sauce", image: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=200&q=80" },
+                { name: "Kadai Chicken", price: "Rs. 330", desc: "Chicken with bell peppers", image: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=200&q=80" },
+                { name: "Egg Curry", price: "Rs. 200", desc: "Boiled eggs in spicy gravy", image: "https://images.unsplash.com/photo-1585937421612-70a008356f36?w=200&q=80" },
+                { name: "Mutton Biryani", price: "Rs. 400", desc: "Aromatic rice with mutton", image: "https://images.unsplash.com/photo-1633945274405-b6c8069047b0?w=200&q=80" },
+                { name: "Tandoori Chicken", price: "Rs. 450", desc: "Roasted chicken full", image: "https://images.unsplash.com/photo-1628294895950-98052523e036?w=200&q=80" }
+            ],
+            snacks: [
+                { name: "Paneer Tikka", price: "Rs. 260", desc: "Grilled cottage cheese", image: "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=200&q=80" },
+                { name: "Chicken Tikka", price: "Rs. 320", desc: "Spicy grilled chicken", image: "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=200&q=80" },
+                { name: "French Fries", price: "Rs. 120", desc: "Crispy potato fingers", image: "https://images.unsplash.com/photo-1630384060421-a4323ceca0ad?w=200&q=80" },
+                { name: "Veg Pakora", price: "Rs. 150", desc: "Fried vegetable fritters", image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=200&q=80" },
+                { name: "Spring Rolls", price: "Rs. 180", desc: "Crispy savory rolls", image: "https://images.unsplash.com/photo-1544025162-d76694265947?w=200&q=80" },
+                { name: "Samosa", price: "Rs. 40", desc: "Potato filled pastry", image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=200&q=80" },
+                { name: "Hara Bhara Kabab", price: "Rs. 200", desc: "Green vegetable patties", image: "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=200&q=80" },
+                { name: "Chicken Wings", price: "Rs. 250", desc: "Fried spicy wings", image: "https://images.unsplash.com/photo-1608039829572-78524f79c4c7?w=200&q=80" },
+                { name: "Fish Finger", price: "Rs. 280", desc: "Crispy fish sticks", image: "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=200&q=80" },
+                { name: "Chilli Potato", price: "Rs. 160", desc: "Spicy fried potatoes", image: "https://images.unsplash.com/photo-1630384060421-a4323ceca0ad?w=200&q=80" }
+            ]
+        };
+
+        // --- 2. LOGIC ---
+
         document.addEventListener('DOMContentLoaded', () => {
             lucide.createIcons();
             switchMenu('veg');
+            switchRooms('luxury'); // Default room view
         });
 
-        // Toggle Mobile Menu
         function toggleMobileMenu() {
             document.getElementById('mobile-menu').classList.toggle('hidden');
         }
 
-        // Scroll
         function scrollToContact() {
             document.getElementById('contact-box').scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Switch Rooms
-        function switchRooms(category) {
-            const luxuryBtn = document.getElementById('btn-luxury');
-            const familyBtn = document.getElementById('btn-family');
-            const luxuryGrid = document.getElementById('rooms-luxury');
-            const familyGrid = document.getElementById('rooms-family');
-
-            if (category === 'luxury') {
-                luxuryBtn.classList.add('bg-black', 'text-white', 'shadow-lg');
-                luxuryBtn.classList.remove('text-gray-500', 'hover:text-black');
-                familyBtn.classList.remove('bg-black', 'text-white', 'shadow-lg');
-                familyBtn.classList.add('text-gray-500', 'hover:text-black');
-                luxuryGrid.classList.remove('hidden');
-                familyGrid.classList.add('hidden');
-            } else {
-                familyBtn.classList.add('bg-black', 'text-white', 'shadow-lg');
-                familyBtn.classList.remove('text-gray-500', 'hover:text-black');
-                luxuryBtn.classList.remove('bg-black', 'text-white', 'shadow-lg');
-                luxuryBtn.classList.add('text-gray-500', 'hover:text-black');
-                familyGrid.classList.remove('hidden');
-                luxuryGrid.classList.add('hidden');
-            }
+        function toggleModal(show) {
+            const modal = document.getElementById('services-modal');
+            if(show) { modal.classList.remove('hidden'); document.body.style.overflow='hidden'; }
+            else { modal.classList.add('hidden'); document.body.style.overflow='auto'; }
         }
 
-        // Menu Data
-        const menuData = {
-            veg: [
-                { name: "Paneer Butter Masala", price: "Rs. 280", desc: "Cottage cheese in rich tomato gravy" },
-                { name: "Dal Makhani", price: "Rs. 220", desc: "Black lentils cooked overnight" },
-                { name: "Vegetable Biryani", price: "Rs. 250", desc: "Aromatic basmati rice with veggies" },
-                { name: "Malai Kofta", price: "Rs. 290", desc: "Potato and paneer dumplings" },
-                { name: "Mushroom Do Pyaza", price: "Rs. 270", desc: "Mushrooms cooked with onions" }
-            ],
-            nonveg: [
-                { name: "Butter Chicken", price: "Rs. 380", desc: "Tandoori chicken in tomato sauce" },
-                { name: "Chicken Curry", price: "Rs. 320", desc: "Spicy homestyle chicken curry" },
-                { name: "Mutton Rogan Josh", price: "Rs. 450", desc: "Tender mutton with Kashmiri spices" },
-                { name: "Fish Curry", price: "Rs. 350", desc: "Fresh river fish in mustard gravy" },
-                { name: "Chicken Biryani", price: "Rs. 340", desc: "Layered aromatic rice with chicken" }
-            ],
-            snacks: [
-                { name: "Paneer Tikka", price: "Rs. 260", desc: "Char-grilled cottage cheese" },
-                { name: "Chicken Tikka", price: "Rs. 320", desc: "Spicy yogurt marinated chicken" },
-                { name: "French Fries", price: "Rs. 120", desc: "Crispy golden potato fingers" },
-                { name: "Veg Pakora", price: "Rs. 150", desc: "Assorted vegetable fritters" },
-                { name: "Spring Rolls", price: "Rs. 180", desc: "Crispy rolls with savory filling" }
-            ]
-        };
+        // Room Switcher Logic
+        function switchRooms(category) {
+            // Update Buttons
+            const luxuryBtn = document.getElementById('btn-luxury');
+            const familyBtn = document.getElementById('btn-family');
+            
+            if (category === 'luxury') {
+                luxuryBtn.className = "px-6 py-2.5 rounded-full text-sm font-bold bg-black text-white shadow-lg cursor-pointer";
+                familyBtn.className = "px-6 py-2.5 rounded-full text-sm font-bold text-gray-500 hover:text-black cursor-pointer bg-gray-100";
+            } else {
+                familyBtn.className = "px-6 py-2.5 rounded-full text-sm font-bold bg-black text-white shadow-lg cursor-pointer";
+                luxuryBtn.className = "px-6 py-2.5 rounded-full text-sm font-bold text-gray-500 hover:text-black cursor-pointer bg-gray-100";
+            }
 
-        // Switch Menu
+            // Render Rooms
+            const container = document.getElementById('rooms-container');
+            container.innerHTML = ''; // Clear existing
+            
+            roomsData[category].forEach(room => {
+                const div = document.createElement('div');
+                div.className = "group bg-white rounded-2xl overflow-hidden hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)] transition-all duration-500 border border-gray-100 animate-fade-in";
+                
+                let badgeHTML = '';
+                if(room.badge) {
+                    badgeHTML = `<div class="absolute top-4 left-4 bg-orange-600 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-lg">${room.badge}</div>`;
+                }
+
+                div.innerHTML = `
+                    <div class="relative h-72 overflow-hidden img-zoom-container">
+                        <img src="${room.image}" alt="${room.name}" class="w-full h-full object-cover">
+                        ${badgeHTML}
+                        <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 to-transparent p-6 pt-20">
+                            <p class="text-white text-xl font-bold">${room.price} <span class="text-xs font-normal opacity-70">/ night</span></p>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3 group-hover:text-orange-600 transition-colors font-serif">${room.name}</h3>
+                        <p class="text-gray-500 text-sm mb-6 leading-relaxed line-clamp-2">${room.desc}</p>
+                        <div class="flex items-center justify-between pt-6 border-t border-gray-100">
+                            <div class="flex gap-4 text-gray-400">
+                                <i data-lucide="wifi" class="w-5 h-5 hover:text-orange-500"></i>
+                                <i data-lucide="coffee" class="w-5 h-5 hover:text-orange-500"></i>
+                                <i data-lucide="bed-double" class="w-5 h-5 hover:text-orange-500"></i>
+                            </div>
+                            <button onclick="scrollToContact()" class="flex items-center gap-2 text-sm font-bold text-black group-hover:text-orange-600 transition-colors cursor-pointer">
+                                Book Now <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+            lucide.createIcons();
+        }
+
+        // Menu Switcher Logic
         function switchMenu(category) {
             // Update Buttons
             ['veg', 'nonveg', 'snacks'].forEach(c => {
@@ -477,57 +476,53 @@
                 }
             });
 
-            // Populate Content
+            // Render Items
             const container = document.getElementById('menu-container');
             container.innerHTML = '';
             
             menuData[category].forEach(item => {
                 const div = document.createElement('div');
-                div.className = "bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition-all border border-gray-100 flex justify-between items-start gap-4";
+                div.className = "bg-white p-4 rounded-2xl shadow-sm hover:shadow-md transition-all border border-gray-100 flex items-center gap-4 animate-fade-in";
                 div.innerHTML = `
-                    <div>
-                        <h4 class="font-bold text-lg text-gray-900 mb-1">${item.name}</h4>
+                    <div class="w-20 h-20 flex-shrink-0 overflow-hidden rounded-xl">
+                        <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex-grow">
+                        <div class="flex justify-between items-start mb-1">
+                            <h4 class="font-bold text-lg text-gray-900">${item.name}</h4>
+                            <span class="font-bold text-orange-600 whitespace-nowrap text-sm">${item.price}</span>
+                        </div>
                         <p class="text-xs text-gray-500 line-clamp-2">${item.desc}</p>
                     </div>
-                    <span class="font-bold text-orange-600 whitespace-nowrap">${item.price}</span>
                 `;
                 container.appendChild(div);
             });
         }
 
-        // Toggle Modal
-        function toggleModal(show) {
-            const modal = document.getElementById('services-modal');
-            if (show) {
-                modal.classList.remove('hidden');
-                document.body.style.overflow = 'hidden';
-            } else {
-                modal.classList.add('hidden');
-                document.body.style.overflow = 'auto';
-            }
-        }
-
         // Slider Logic
         let currentSlide = 0;
-        const slides = document.querySelectorAll('.gallery-slide');
-        const totalSlides = slides.length;
-
+        const totalSlides = 3;
+        
         function updateSlider() {
+            const slides = document.querySelectorAll('.gallery-slide');
+            const dots = document.getElementById('gallery-dots').children;
+            
             slides.forEach((slide, index) => {
                 slide.style.opacity = index === currentSlide ? '1' : '0';
             });
+            Array.from(dots).forEach((dot, index) => {
+                if(index === currentSlide) {
+                    dot.classList.remove('bg-white/30', 'w-4'); dot.classList.add('bg-orange-500', 'w-12');
+                } else {
+                    dot.classList.remove('bg-orange-500', 'w-12'); dot.classList.add('bg-white/30', 'w-4');
+                }
+            });
         }
 
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % totalSlides;
-            updateSlider();
-        }
-
-        function prevSlide() {
-            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-            updateSlider();
-        }
-
+        function nextSlide() { currentSlide = (currentSlide + 1) % totalSlides; updateSlider(); }
+        function prevSlide() { currentSlide = (currentSlide - 1 + totalSlides) % totalSlides; updateSlider(); }
+        function goToSlide(index) { currentSlide = index; updateSlider(); }
+        
         setInterval(nextSlide, 4000);
 
         // Navbar Scroll
